@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Jeudi Oui !</title>
+<style>
+:root { --color-fg: #1a1a1a; --color-fg-muted: #727272; --color-bg: #ffffff; --color-panel: #ffffff; --color-border-line: #e2e2e2;
+  --color-ok: #138a4a; --color-warn: #b36b00; --color-bad: #c8102e; --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 16px; --cds-gap-lg: 24px; --cds-gap-xl: 40px;
+  --cds-surface-popover: #ffffff; --cds-shadow-popover: 0 4px 16px rgba(0,0,0,.12); --cds-chart-grid: #ececec; --cds-chart-axis: #1a1a1a; --cds-chart-reference: #727272; --cds-dur-slow: .3s; }
+html { background: #fff; }
+body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
+#dash-root { max-width: 1200px; margin: 0 auto; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px)); }
+.dash-skeleton { color: transparent; }
+</style>
+<style>
+@font-face { font-family: 'JO Fira Sans'; src: url('fonts/firasans-400.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'JO Fira Sans'; src: url('fonts/firasans-600.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'JO Fira Sans'; src: url('fonts/firasans-700.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'JO Fira Sans'; src: url('fonts/firasans-900.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+@font-face { font-family: 'JO Castoro'; src: url('fonts/castoro-italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+/* Charte newsletter Jeudi Oui ! : Fira Sans + Castoro italique, encre #1a1a1a, dégradé violet / magenta / rose, angles droits, filet bas épais */
+.jo { --jo-sans: 'JO Fira Sans', 'Fira Sans', system-ui, sans-serif; --jo-serif: 'JO Castoro', 'Castoro', Georgia, serif;
+  --jo-ink: var(--color-fg); --jo-grey: var(--color-fg-muted); --jo-pink: #ec0d78; --jo-magenta: #e000c8; --jo-violet: #6f2fc5;
+  --jo-bar-muted: color-mix(in srgb, var(--color-fg) 18%, transparent);
+  --jo-grad: linear-gradient(115deg, #6f2fc5 0%, #bb12e1 18%, #f805cd 42%, #ec0d78 72%, #eb3757 100%);
+  display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--jo-sans); font-variant-numeric: tabular-nums; color: var(--jo-ink); }
+.jo-hero { background: var(--jo-grad); color: #fff; padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 48px); }
+.jo-hero-in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--cds-gap-md); max-width: 46rem; margin-inline: auto; }
+.jo-brand { display: flex; flex-direction: column; align-items: flex-start; }
+.jo-blk { background: #1a1a1a; color: #fff; font-weight: 900; text-transform: uppercase; font-size: clamp(28px, 5vw, 44px); line-height: 1; padding: 12px 16px; }
+.jo-sub { background: #fff; color: #1a1a1a; font-weight: 700; font-size: clamp(18px, 3vw, 28px); line-height: 1; padding: 8px 12px; margin-left: clamp(32px, 8vw, 96px); }
+.jo-date { margin: 0; font-family: var(--jo-serif); font-style: italic; font-size: clamp(22px, 3.4vw, 33px); line-height: 1.1; text-transform: uppercase; }
+.jo-take { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.45; max-width: 60ch; text-wrap: balance; }
+.jo-pick { display: flex; gap: var(--cds-gap-sm); align-items: center; flex-wrap: wrap; justify-content: center; }
+.jo-pick label { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }
+.jo select { font: inherit; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; padding: 9px 16px; border: 1px solid var(--jo-ink); border-radius: 0; background: var(--color-bg); color: var(--jo-ink); cursor: pointer; }
+.jo-hero select { background: #fff; color: #1a1a1a; border-color: #fff; min-width: 14rem; }
+.jo select:focus-visible { outline: 2px solid var(--jo-pink); outline-offset: 2px; }
+.jo-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr)); gap: var(--cds-gap-lg); }
+.jo-tile { border-top: 1px solid var(--jo-ink); border-bottom: 6px solid var(--jo-ink); padding: 14px 0 18px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.jo-tile .lab { font-size: 13px; text-transform: uppercase; letter-spacing: .02em; }
+.jo-tile .sub { font-family: var(--jo-serif); font-style: italic; font-size: 12px; color: var(--jo-grey); margin-top: -4px; }
+.jo-tile .val { margin-top: auto;  font-weight: 700; font-size: 34px; line-height: 1.05; }
+.jo-tile .cmp { font-size: 13px; display: flex; flex-direction: column; gap: 2px; font-weight: 600; }
+.jo-up { color: var(--color-ok); } .jo-down { color: var(--color-bad); }
+.jo-sec h2 { font-weight: 900; font-size: 24px; line-height: 1.15; margin: 0 0 var(--cds-gap-md); }
+.jo-sec h2::after { content: ""; display: block; width: 48px; height: 6px; margin-top: 8px; background: var(--jo-grad); }
+.jo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-lg); }
+.jo-card { border-top: 1px solid var(--jo-ink); border-bottom: 6px solid var(--jo-ink); padding: 16px 0 20px; min-width: 0; display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+.jo-card h3 { margin: 0; font-weight: 900; font-size: 20px; line-height: 1.2; }
+.jo-kicker { font-size: 13px; text-transform: uppercase; margin: 0; }
+.jo-note { margin: 0; font-family: var(--jo-serif); font-style: italic; font-size: 14px; line-height: 1.35; color: var(--jo-grey); }
+.jo-chart { position: relative; min-height: 260px; }
+.jo-comment { margin: 0; font-size: 15px; line-height: 1.4; }
+.jo-comment .jo-hl { font-weight: 900; color: #ec0d78; }
+.jo-chart.tall { min-height: 300px; }
+.jo-chart svg text { font-family: var(--jo-sans); }
+.jo-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--jo-ink); box-shadow: var(--cds-shadow-popover); padding: 6px 10px; font-size: 13px; white-space: nowrap; z-index: 2; }
+.jo-tip .d { font-weight: 700; }
+.jo-tablewrap { overflow: auto; max-height: 28rem; }
+.jo table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.jo th, .jo td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.jo th:first-child, .jo td:first-child { text-align: left; }
+.jo th { position: sticky; top: 0; background: var(--color-bg); font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: .02em; border-bottom: 2px solid var(--jo-ink); cursor: pointer; }
+.jo tr.sel td { background: color-mix(in srgb, #ec0d78 12%, transparent); font-weight: 700; }
+.jo tr.sel td:first-child { box-shadow: inset 4px 0 0 #ec0d78; }
+.jo tbody tr { cursor: pointer; }
+.jo tbody tr:hover td { background: color-mix(in srgb, var(--color-fg) 5%, transparent); }
+.jo-legend { display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; font-size: 13px; }
+.jo-legend b { font-weight: 400; }
+.jo-legend i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+.jo-legend .sw-a { background: #ec0d78; } .jo-legend .sw-b { background: var(--jo-bar-muted); }
+.jo-donut { position: relative; display: flex; flex-direction: column; gap: var(--cds-gap-md); align-items: center; min-height: 220px; }
+.jo-donut svg { flex: 0 0 auto; }
+.jo-catlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; width: 100%; max-width: 22rem; min-width: 0; }
+.jo-catlist li { display: grid; grid-template-columns: 12px 1fr auto auto; gap: var(--cds-gap-sm); align-items: center; }
+.jo-catlist i { width: 12px; height: 12px; }
+.jo-catlist .m { color: var(--jo-grey); }
+.jo-catlist li span:nth-child(3) { font-weight: 700; }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+<script src="d3.min.js"></script>
+<script src="dash-shim.js"></script>
+</head>
+<body>
+<div id="dash-root">
+
+
+<div class="jo">
+  <header class="jo-hero" id="haut">
+    <div class="jo-hero-in">
+      <div class="jo-brand">
+        <span class="jo-blk">Jeudi Oui !</span>
+        <span class="jo-sub">Tableau de bord</span>
+      </div>
+      <p class="jo-date" id="jo-date"></p>
+      <p class="jo-take dash-skeleton" id="takeaway" data-source="comparatifs">—</p>
+      <div class="jo-pick">
+        <label for="jo-ed">Édition</label>
+        <select id="jo-ed" data-source="editions"></select>
+      </div>
+    </div>
+  </header>
+
+  <section class="jo-tiles" id="chiffres-cles"></section>
+
+  <section class="jo-sec" id="emailing">
+    <h2>Performances des campagnes emailing de l'édition</h2>
+    <div class="jo-card">
+      <p class="jo-note">Deux envois par édition : les anciens acheteurs la veille, les prospects opt-in concert le jour J. Données disponibles depuis novembre 2024.</p>
+      <div class="jo-tablewrap">
+        <table id="tab-crm" data-source="crm" data-row-key="edition,segment">
+          <thead><tr>
+            <th data-field="segment">Segment</th>
+            <th data-field="delivres">Nb emails envoyés</th>
+            <th data-field="ouvreurs">Ouvreurs</th>
+            <th data-field="cliqueurs">Cliqueurs</th>
+            <th data-field="taux_ouverture">Taux d'ouverture</th>
+            <th data-field="taux_clic">Taux de clics</th>
+            <th data-field="reactivite">Clic / ouverture</th>
+            <th data-field="desabonnements">Désabos</th>
+            <th data-field="taux_desabo">Taux désabo</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="jo-note" id="crm-empty" hidden>Pas de données emailing pour cette édition (campagnes archivées).</p>
+    </div>
+  </section>
+
+  <section class="jo-sec" id="concerts-profils">
+    <div class="jo-grid">
+      <div class="jo-card" id="concerts">
+        <p class="jo-kicker">Focus sur la sélection du mois</p>
+        <h3>Classement des concerts les plus vendus</h3>
+        <p class="jo-note">Nombre de billets et le CA associé de chaque concert</p>
+        <div class="jo-chart tall" id="chart-concerts" data-source="concerts"></div>
+      </div>
+      <div class="jo-card" id="categories">
+        <p class="jo-kicker">Focus sur les catégories de places</p>
+        <h3>Répartition des billets les plus vendus pour chaque catégorie</h3>
+        <div class="jo-donut" id="chart-cat" data-source="categories"></div>
+        <p class="jo-note" id="cat-empty" hidden>Catégorie de place non renseignée pour cette édition (donnée disponible depuis décembre 2024).</p>
+      </div>
+      <div class="jo-card" id="profils">
+        <p class="jo-kicker">Focus sur le profil des acheteurs de l'offre</p>
+        <h3>Profil des acheteurs Jeudi Oui !</h3>
+        <p class="jo-note">Les acheteurs de ce mois en rose en comparaison de la moyenne des 12 éditions précédentes</p>
+        <div class="jo-legend"><span><i class="sw-a"></i><b id="leg-ed">Édition</b></span><span><i class="sw-b"></i>Moyenne 12 éditions précédentes</span></div>
+        <div class="jo-chart" id="chart-zone" data-source="profils profils_ref"></div>
+        <div class="jo-chart" id="chart-age" data-source="profils profils_ref"></div>
+        <p class="jo-comment" id="age-comment" hidden>Les 45-74 ans représentent à eux seuls <b class="jo-hl" data-source="part_45_74" data-field="part_billets">—</b> des ventes générées.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="jo-sec" id="evolution">
+    <h2>Évolution d'une édition à l'autre</h2>
+    <div class="jo-card">
+      <div class="jo-pick">
+        <label for="jo-ind">Indicateur</label>
+        <select id="jo-ind"></select>
+      </div>
+      <p class="jo-note" id="ind-note"></p>
+      <div class="jo-chart" id="chart-evol" data-source="editions"></div>
+    </div>
+  </section>
+
+  <section class="jo-sec" id="historique">
+    <h2>Toutes les éditions</h2>
+    <div class="jo-card">
+      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis décembre 2024, emailing depuis novembre 2024.</p>
+      <div class="jo-tablewrap">
+        <table id="tab-ed" data-source="editions" data-row-key="edition">
+          <thead><tr>
+            <th data-field="libelle">Édition</th>
+            <th data-field="acheteurs">Acheteurs</th>
+            <th data-field="billets">Billets</th>
+            <th data-field="ca_ttc">CA TTC</th>
+            <th data-field="panier_moyen">Panier moyen</th>
+            <th data-field="concerts">Concerts éligibles</th>
+            <th data-field="age_moyen">Âge moyen des acheteurs</th>
+            <th data-field="delivres_total">Nb emails envoyés</th>
+            <th data-field="taux_ouverture_prospects">Taux d'ouverture (cible prospects)</th>
+            <th data-field="taux_clic_prospects">Taux de clics (cible prospects)</th>
+            <th data-field="conversion">Taux de conversion</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+window.JO = (() => {
+  const fr = d3.formatLocale({decimal: ',', thousands: ' ', grouping: [3], currency: ['', ' €'], percent: ' %'});
+  const num = (v) => (v === '' || v == null || Number.isNaN(+v)) ? null : +v;
+  const f = {
+    int: fr.format(',.0f'), eur: fr.format(',.0f'), eur2: fr.format(',.2f'), pct: fr.format('.1%'), pct2: fr.format('.2%'), dec1: fr.format(',.1f'), dec2: fr.format(',.2f'),
+  };
+  const METRICS = [
+    {k: 'acheteurs', lab: 'Nombre d\'acheteurs', fmt: (v) => f.int(v), rate: false},
+    {k: 'billets', lab: 'Nombre de billets vendus', fmt: (v) => f.int(v), rate: false},
+    {k: 'ca_ttc', lab: 'CA TTC', fmt: (v) => f.eur(v) + ' €', rate: false},
+    {k: 'panier_moyen', lab: 'Panier moyen', fmt: (v) => f.eur2(v) + ' €', rate: false},
+    {k: 'part_reachat', lab: 'La part de ceux ayant déjà acheté lors d\'une précédente édition', fmt: (v) => f.pct(v), rate: true},
+    {k: 'taux_clic_prospects', lab: 'Taux de clics', sub: 'cible prospects', fmt: (v) => f.pct2(v), rate: true},
+    {k: 'taux_ouverture_prospects', lab: 'Taux d\'ouverture', sub: 'cible prospects', fmt: (v) => f.pct(v), rate: true},
+    {k: 'taux_clic_anciens', lab: 'Taux de clics', sub: 'cible anciens acheteurs', fmt: (v) => f.pct(v), rate: true},
+    {k: 'conversion', lab: 'Taux de conversion (acheteurs / nb emails envoyés)', fmt: (v) => f.pct2(v), rate: true},
+    {k: 'delivres_total', lab: 'Nb emails envoyés', fmt: (v) => f.int(v), rate: false},
+    {k: 'prix_moyen_billet', lab: 'Prix moyen par billet', fmt: (v) => f.eur2(v) + ' €', rate: false},
+    {k: 'concerts', lab: 'Nombre de concerts éligibles à l\'offre', fmt: (v) => f.int(v), rate: false},
+    {k: 'age_moyen', lab: 'Âge moyen des acheteurs', fmt: (v) => f.dec1(v) + ' ans', rate: false},
+  ];
+  const TILES = ['acheteurs', 'billets', 'ca_ttc', 'panier_moyen', 'part_reachat', 'taux_clic_prospects'];
+  const byKey = Object.fromEntries(METRICS.map((m) => [m.k, m]));
+  const editions = () => {
+    const d = dash.data('editions');
+    return d.status === 'ok' ? d.data.slice().sort((a, b) => d3.ascending(a.edition, b.edition)) : [];
+  };
+  const current = () => {
+    const eds = editions();
+    const p = dash.params().edition;
+    return eds.find((e) => e.edition === p) || eds[eds.length - 1];
+  };
+  const BRAND = ['#ec0d78', '#bb12e1', '#f805cd', '#eb3757', '#6f2fc5', '#ff7ab8', '#8a8a8a'];
+  const cleanConcert = (s) => String(s).replace(/^DM\.(?:[A-Z]+\.)?\w+\./, '');
+  const tip = (box) => {
+    let t = box.querySelector('.jo-tip');
+    if (!t) { t = document.createElement('div'); t.className = 'jo-tip'; t.hidden = true; box.appendChild(t); }
+    return {
+      show(ev, lines) {
+        t.replaceChildren(...lines.map((l, i) => { const div = document.createElement('div'); if (i === 0) div.className = 'd'; div.textContent = l; return div; }));
+        t.hidden = false;
+        const r = box.getBoundingClientRect();
+        const x = ev.clientX - r.left, y = ev.clientY - r.top;
+        const w = t.offsetWidth;
+        t.style.left = Math.max(0, Math.min(r.width - w, x + 12)) + 'px';
+        t.style.top = Math.max(0, y - t.offsetHeight - 8) + 'px';
+      },
+      hide() { t.hidden = true; },
+    };
+  };
+  return {BRAND, fr, num, f, METRICS, TILES, byKey, editions, current, cleanConcert, tip};
+})();
+</script>
+
+<script>
+dash.calc('comparatifs', {
+  title: 'Comparaison avec les éditions précédentes',
+  description: 'Pour chaque édition et indicateur : valeur, édition précédente, moyenne des 12 éditions précédentes et écarts (relatif pour les volumes, en points pour les taux).',
+  inputs: ['editions'],
+  fn: (editions) => {
+    const keys = ['acheteurs', 'billets', 'ca_ttc', 'panier_moyen', 'part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_clic_anciens', 'conversion', 'delivres_total', 'prix_moyen_billet', 'concerts', 'age_moyen'];
+    const rates = ['part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_clic_anciens', 'conversion'];
+    const n = (v) => (v === '' || v == null) ? null : +v;
+    const eds = editions.slice().sort((a, b) => (a.edition < b.edition ? -1 : 1));
+    const out = [];
+    eds.forEach((e, i) => {
+      keys.forEach((k) => {
+        const v = n(e[k]);
+        const prevRow = eds.slice(0, i).reverse().find((p) => n(p[k]) != null);
+        const prev = prevRow ? n(prevRow[k]) : null;
+        const last12 = eds.slice(Math.max(0, i - 12), i).map((p) => n(p[k])).filter((x) => x != null);
+        const avg = last12.length ? last12.reduce((s, x) => s + x, 0) / last12.length : null;
+        const isRate = rates.includes(k);
+        const gap = (ref) => (v == null || ref == null || ref === 0) ? null : (isRate ? v - ref : v / ref - 1);
+        out.push({edition: e.edition, indicateur: k, valeur: v, precedente: prev, edition_precedente: prevRow ? prevRow.libelle : null,
+          moyenne_12: avg, nb_editions_moyenne: last12.length, ecart_precedente: gap(prev), ecart_moyenne: gap(avg), type_ecart: isRate ? 'points' : 'relatif'});
+      });
+    });
+    return out;
+  },
+});
+
+dash.calc('profils_ref', {
+  title: 'Profil moyen des 12 éditions précédentes',
+  description: 'Pour chaque édition, part moyenne de chaque zone et tranche d\'âge sur les 12 éditions qui la précèdent.',
+  inputs: ['profils'],
+  fn: (profils) => {
+    const eds = [...new Set(profils.map((p) => p.edition))].sort();
+    const out = [];
+    eds.forEach((e, i) => {
+      const prev = new Set(eds.slice(Math.max(0, i - 12), i));
+      const groups = {};
+      profils.filter((p) => prev.has(p.edition)).forEach((p) => {
+        const k = p.dimension + '|' + p.categorie;
+        (groups[k] = groups[k] || []).push(+p.part);
+      });
+      Object.entries(groups).forEach(([k, arr]) => {
+        const [dimension, categorie] = k.split('|');
+        out.push({edition: e, dimension, categorie, part_moyenne: arr.reduce((s, x) => s + x, 0) / arr.length});
+      });
+    });
+    return out;
+  },
+});
+dash.calc('part_45_74', {
+  title: 'Part des ventes des 45-74 ans',
+  description: 'Billets achetés par les 45-54, 55-64 et 65-74 ans, divisés par le total des billets de l\'édition (âges inconnus compris).',
+  inputs: ['profils'],
+  fn: (profils) => {
+    const out = {};
+    profils.filter((p) => p.dimension === "Tranche d'âge").forEach((p) => {
+      const o = out[p.edition] = out[p.edition] || {edition: p.edition, billets_45_74: 0, billets_total: 0};
+      const b = +p.billets || 0;
+      o.billets_total += b;
+      if (['45-54', '55-64', '65-74'].includes(p.categorie)) o.billets_45_74 += b;
+    });
+    return Object.values(out).map((o) => ({...o, part_billets: o.billets_total ? o.billets_45_74 / o.billets_total : null}));
+  },
+});
+</script>
+
+<script>
+(() => {
+  const {num, f, METRICS, TILES, byKey, editions, current} = window.JO;
+  const sel = document.getElementById('jo-ed');
+  const ind = document.getElementById('jo-ind');
+  sel.addEventListener('change', () => dash.setParams({edition: sel.value}));
+  ind.replaceChildren(...METRICS.map((m) => new Option(m.sub ? m.lab + ' (' + m.sub + ')' : m.lab, m.k)));
+  ind.addEventListener('change', () => dash.setParams({indicateur: ind.value}));
+  if (!dash.params().indicateur) dash.setParams({indicateur: 'acheteurs'});
+
+  const tiles = document.getElementById('chiffres-cles');
+  tiles.replaceChildren(...TILES.map((k) => {
+    const d = document.createElement('div');
+    d.className = 'jo-tile'; d.id = 'tuile-' + k;
+    d.innerHTML = '<span class="lab"></span><span class="sub" hidden></span><span class="val dash-skeleton" data-source="editions">—</span><span class="cmp"><span class="c1" data-source="comparatifs">—</span><span class="c2" data-source="comparatifs">—</span></span>';
+    d.querySelector('.lab').textContent = byKey[k].lab;
+    if (byKey[k].sub) { const sb = d.querySelector('.sub'); sb.textContent = byKey[k].sub; sb.hidden = false; }
+    return d;
+  }));
+
+  const gapText = (row, which) => {
+    const g = row ? row[which] : null;
+    if (g == null) return null;
+    const s = row.type_ecart === 'points' ? (g >= 0 ? '+' : '−') + f.dec1(Math.abs(g) * 100) + ' pt' : (g >= 0 ? '+' : '−') + f.pct(Math.abs(g)).replace(' %', ' %');
+    return s;
+  };
+
+  dash.onData(() => {
+    const eds = editions();
+    const cur = current();
+    const st = dash.data('editions').status;
+    if (eds.length && sel.options.length !== eds.length) sel.replaceChildren(...eds.slice().reverse().map((e) => new Option(e.libelle, e.edition)));
+    if (cur) sel.value = cur.edition;
+    const dt = document.getElementById('jo-date');
+    if (cur) {
+      const d = new Date(cur.edition + 'T12:00:00');
+      dt.textContent = 'Le ' + d.toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'});
+    }
+    ind.value = dash.params().indicateur || 'acheteurs';
+    const cmp = dash.data('comparatifs');
+    const rows = cmp.status === 'ok' ? cmp.data : [];
+    TILES.forEach((k) => {
+      const t = document.getElementById('tuile-' + k);
+      const val = t.querySelector('.val'), c1 = t.querySelector('.c1'), c2 = t.querySelector('.c2');
+      if (!cur) { val.textContent = '—'; return; }
+      val.classList.remove('dash-skeleton');
+      val.dataset.field = k; val.dataset.where = 'edition=' + cur.edition;
+      const v = num(cur[k]);
+      val.textContent = v == null ? '—' : byKey[k].fmt(v);
+      const r = rows.find((x) => x.edition === cur.edition && x.indicateur === k);
+      [[c1, 'ecart_precedente', 'vs ' + (r && r.edition_precedente ? r.edition_precedente : 'éd. précédente')], [c2, 'ecart_moyenne', 'vs moy. 12 éd.']].forEach(([el, field, lab]) => {
+        el.dataset.field = field; el.dataset.where = 'edition=' + cur.edition + '&indicateur=' + k;
+        const txt = gapText(r, field);
+        el.className = el.className.replace(/ ?jo-(up|down)/g, '');
+        if (txt == null) { el.textContent = '—'; return; }
+        el.textContent = txt + ' ' + lab;
+        el.classList.add(r[field] >= 0 ? 'jo-up' : 'jo-down');
+      });
+    });
+    const take = document.getElementById('takeaway');
+    if (cur && rows.length) {
+      take.classList.remove('dash-skeleton');
+      const a = rows.find((x) => x.edition === cur.edition && x.indicateur === 'acheteurs');
+      const c = rows.find((x) => x.edition === cur.edition && x.indicateur === 'ca_ttc');
+      const parts = [`Édition de ${cur.libelle} : ${f.int(num(cur.acheteurs))} acheteurs pour ${f.int(num(cur.billets))} billets`];
+      if (num(cur.ca_ttc) != null) parts[0] += ` et ${f.eur(num(cur.ca_ttc))} € TTC`;
+      let s = '';
+      const up = (r) => r.ecart_moyenne >= 0;
+      const ref = 'la moyenne des 12 éditions précédentes';
+      const hasA = a && a.ecart_moyenne != null, hasC = c && c.ecart_moyenne != null;
+      const pA = hasA ? `${f.int(num(cur.acheteurs))}, soit ${gapText(a, 'ecart_moyenne')}` : '';
+      const pC = hasC ? `${f.eur(num(cur.ca_ttc))}\u00a0€, soit ${gapText(c, 'ecart_moyenne')}` : '';
+      if (hasA && hasC && up(a) === up(c)) {
+        s += ` Le nombre d'acheteurs de cette édition (${pA}) et le chiffre d'affaires (${pC}) sont ${up(a) ? 'supérieurs' : 'inférieurs'} à ${ref}.`;
+      } else if (hasA && hasC) {
+        s += ` Le nombre d'acheteurs de cette édition (${pA}) est ${up(a) ? 'supérieur' : 'inférieur'} à ${ref}, et le chiffre d'affaires (${pC}) lui est ${up(c) ? 'supérieur' : 'inférieur'}.`;
+      } else if (hasA) {
+        s += ` Le nombre d'acheteurs de cette édition (${pA}) est ${up(a) ? 'supérieur' : 'inférieur'} à ${ref}.`;
+      } else if (hasC) {
+        s += ` Le chiffre d'affaires de cette édition (${pC}) est ${up(c) ? 'supérieur' : 'inférieur'} à ${ref}.`;
+      }
+      take.textContent = s.trim() || (parts[0] + '.');
+    } else if (st !== 'loading') { take.classList.remove('dash-skeleton'); take.textContent = '—'; }
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const {num, METRICS, byKey, editions, current, tip} = window.JO;
+  const box = document.getElementById('chart-evol');
+  const note = document.getElementById('ind-note');
+  const NOTES = {
+    ca_ttc: 'Montants disponibles à partir de décembre 2024.', panier_moyen: 'Montants disponibles à partir de décembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de décembre 2024.',
+    taux_clic_prospects: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    taux_ouverture_prospects: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    delivres_total: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
+    conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis novembre 2024.',
+    taux_clic_anciens: 'Données emailing disponibles depuis novembre 2024.',
+    part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure, depuis octobre 2023. Les premières éditions sont donc mécaniquement basses.',
+  };
+  dash.onData(() => {
+    const eds = editions();
+    const k = dash.params().indicateur || 'acheteurs';
+    const m = byKey[k];
+    note.textContent = NOTES[k] || '';
+    const cur = current();
+    d3.select(box).selectAll('svg').remove();
+    if (!eds.length) return;
+    const cmp = dash.data('comparatifs');
+    const W = box.clientWidth, H = 260, mL = 8, mR = 8, mT = 16, mB = 34;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const vals = eds.map((e) => num(e[k]));
+    const max = d3.max(vals) || 1;
+    const y = d3.scaleLinear([0, max * 1.1], [H - mB, mT]);
+    // y tick labels to measure left margin
+    const ticks = y.ticks(4);
+    const tmp = svg.append('g').attr('font-size', 11);
+    const widths = ticks.map((t) => { const n = tmp.append('text').text(m.fmt(t)); const w = n.node().getComputedTextLength(); n.remove(); return w; });
+    tmp.remove();
+    const left = mL + d3.max(widths) + 8;
+    const x = d3.scaleBand(eds.map((e) => e.edition), [left, W - mR]).padding(0.25);
+    const g = svg.append('g');
+    g.selectAll('line.grid').data(ticks).join('line').attr('x1', left).attr('x2', W - mR).attr('y1', (t) => y(t)).attr('y2', (t) => y(t)).style('stroke', 'var(--cds-chart-grid)');
+    g.selectAll('text.yt').data(ticks).join('text').attr('x', left - 6).attr('y', (t) => y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').style('fill', 'var(--color-fg-muted)').attr('font-size', 11).text((t) => m.fmt(t));
+    const t = tip(box);
+    g.selectAll('rect.bar').data(eds.filter((e) => num(e[k]) != null)).join('rect')
+      .attr('x', (e) => x(e.edition)).attr('width', x.bandwidth()).attr('y', (e) => y(num(e[k]))).attr('height', (e) => y(0) - y(num(e[k])))
+            .style('fill', (e) => (cur && e.edition === cur.edition) ? 'var(--jo-pink)' : 'var(--jo-bar-muted)')
+      .style('cursor', 'pointer')
+      .on('click', (ev, e) => dash.setParams({edition: e.edition}))
+      .on('mousemove', (ev, e) => t.show(ev, [e.libelle, (m.sub ? m.lab + ' (' + m.sub + ')' : m.lab) + ' : ' + m.fmt(num(e[k]))]))
+      .on('mouseleave', () => t.hide());
+    // moyenne des 12 éditions précédant l'édition choisie
+    if (cur && cmp.status === 'ok') {
+      const r = cmp.data.find((x) => x.edition === cur.edition && x.indicateur === k);
+      if (r && r.moyenne_12 != null) {
+        const yy = y(r.moyenne_12);
+        g.append('line').attr('x1', left).attr('x2', W - mR).attr('y1', yy).attr('y2', yy).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+        g.append('text').attr('x', W - mR).attr('y', yy - 5).attr('text-anchor', 'end').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text('Moy. 12 éd. préc. ' + m.fmt(r.moyenne_12));
+      }
+    }
+    // x labels: every n-th
+    const lw = 52, step = Math.max(1, Math.ceil(lw / x.step()));
+    g.selectAll('text.xt').data(eds.filter((e, i) => i % step === (eds.length - 1) % step)).join('text')
+      .attr('x', (e) => x(e.edition) + x.bandwidth() / 2).attr('y', H - mB + 16).attr('text-anchor', 'middle').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text((e) => e.libelle);
+    g.append('line').attr('x1', left).attr('x2', W - mR).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const {num, f, current} = window.JO;
+  const tb = document.querySelector('#tab-crm tbody');
+  const empty = document.getElementById('crm-empty');
+  dash.onData(() => {
+    const d = dash.data('crm');
+    const cur = current();
+    const rows = (d.status === 'ok' && cur) ? d.data.filter((r) => r.edition === cur.edition) : [];
+    empty.hidden = !(d.status === 'ok' && cur && !rows.length);
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.edition) + ',' + encodeURIComponent(r.segment);
+      [r.segment, f.int(num(r.delivres)), f.int(num(r.ouvreurs)), f.int(num(r.cliqueurs)), f.pct(num(r.taux_ouverture)), f.pct2(num(r.taux_clic)), f.pct(num(r.reactivite)), f.int(num(r.desabonnements)), f.pct2(num(r.taux_desabo))]
+        .forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+      return tr;
+    }));
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const {num, f, current, cleanConcert, tip} = window.JO;
+  const box = document.getElementById('chart-concerts');
+  dash.onData(() => {
+    d3.select(box).selectAll('svg').remove();
+    const d = dash.data('concerts');
+    const cur = current();
+    if (d.status !== 'ok' || !cur) return;
+    const rows = d.data.filter((r) => r.edition === cur.edition).map((r) => ({...r, b: num(r.billets) || 0, ca: num(r.ca_ttc), nom: cleanConcert(r.concert)})).sort((a, b) => b.b - a.b);
+    if (!rows.length) return;
+    const W = box.clientWidth, rowH = 26, H = rows.length * rowH + 8;
+    box.style.minHeight = H + 'px';
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const labW = Math.min(W * 0.55, 260);
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.b)], [0, W - labW - 90]);
+    const t = tip(box);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('transform', (r, i) => `translate(0,${i * rowH + 4})`);
+    g.append('text').attr('x', 0).attr('y', rowH / 2 - 2).attr('dy', '0.32em').attr('font-size', 11).style('fill', 'var(--color-fg)')
+      .text((r, i) => (i + 1) + '. ' + r.nom).each(function () {
+        const el = this; let s = el.textContent;
+        while (el.getComputedTextLength() > labW - 8 && s.length > 4) { s = s.slice(0, -2); el.textContent = s + '…'; }
+      });
+    g.append('rect').attr('x', labW).attr('y', 3).attr('height', rowH - 10).attr('width', (r) => Math.max(2, x(r.b))).style('fill', 'var(--jo-pink)')
+      .on('mousemove', (ev, r) => t.show(ev, [r.nom, (r.date_concert || '').slice(0, 16), f.int(r.b) + ' billets' + (r.ca != null ? ' · ' + f.eur(r.ca) + ' €' : '')]))
+      .on('mouseleave', () => t.hide());
+    g.append('text').attr('x', (r) => labW + Math.max(2, x(r.b)) + 6).attr('y', rowH / 2 - 2).attr('dy', '0.32em').attr('font-size', 11).style('fill', 'var(--color-fg-muted)')
+      .text((r) => f.int(r.b) + (r.ca != null ? ' · ' + f.eur(r.ca) + ' €' : ''));
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const {num, f, current, tip} = window.JO;
+  const box = document.getElementById('chart-cat');
+  const empty = document.getElementById('cat-empty');
+  const ORDER = ['Catégorie Or', 'Catégorie 1', 'Catégorie 2', 'Catégorie 3', 'Catégorie 4', 'Catégorie 5', 'Catégorie unique'];
+  dash.onData(() => {
+    box.replaceChildren();
+    const d = dash.data('categories');
+    const cur = current();
+    if (d.status !== 'ok' || !cur) { empty.hidden = true; return; }
+    const rows = d.data.filter((r) => r.edition === cur.edition).map((r) => ({c: r.categorie, b: num(r.billets) || 0, p: num(r.part) || 0}))
+      .sort((a, b) => d3.ascending(ORDER.indexOf(a.c), ORDER.indexOf(b.c)));
+    empty.hidden = rows.length > 0;
+    if (!rows.length) return;
+    const color = (c) => window.JO.BRAND[ORDER.indexOf(c) % window.JO.BRAND.length];
+    const S = Math.min(200, box.clientWidth), R = S / 2;
+    const svg = d3.select(box).append('svg').attr('width', S).attr('height', S).attr('viewBox', `${-R} ${-R} ${S} ${S}`);
+    const arcs = d3.pie().sort(null).value((r) => r.b)(rows);
+    const arc = d3.arc().innerRadius(R * 0.55).outerRadius(R - 2).padAngle(0.012);
+    const t = tip(box);
+    svg.selectAll('path').data(arcs).join('path').attr('d', arc).style('fill', (a) => color(a.data.c))
+      .on('mousemove', (ev, a) => t.show(ev, [a.data.c, f.int(a.data.b) + ' billets · ' + f.pct(a.data.p)]))
+      .on('mouseleave', () => t.hide());
+    const total = d3.sum(rows, (r) => r.b);
+    svg.append('text').attr('text-anchor', 'middle').attr('dy', '-0.1em').attr('font-size', 22).style('fill', 'var(--color-fg)').style('font-family', 'var(--jo-sans)').style('font-weight', 900).text(f.int(total));
+    svg.append('text').attr('text-anchor', 'middle').attr('dy', '1.3em').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text('billets');
+    const ul = document.createElement('ul'); ul.className = 'jo-catlist';
+    rows.forEach((r) => {
+      const li = document.createElement('li');
+      const i = document.createElement('i'); i.style.background = color(r.c);
+      const n = document.createElement('span'); n.textContent = r.c;
+      const p = document.createElement('span'); p.textContent = f.pct(r.p);
+      const b = document.createElement('span'); b.className = 'm'; b.textContent = f.int(r.b) + ' bil.';
+      li.append(i, n, p, b); ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const {num, f, current, tip} = window.JO;
+  
+  const draw = (box, dimension, cats) => {
+    d3.select(box).selectAll('svg,.ttl').remove();
+    const p = dash.data('profils'), ref = dash.data('profils_ref');
+    const cur = current();
+    if (p.status !== 'ok' || !cur) return;
+    const rows = p.data.filter((r) => r.edition === cur.edition && r.dimension === dimension && cats.includes(r.categorie));
+    const refs = ref.status === 'ok' ? ref.data.filter((r) => r.edition === cur.edition && r.dimension === dimension) : [];
+    const data = cats.map((c) => ({c, a: num((rows.find((r) => r.categorie === c) || {}).part) || 0, b: (refs.find((r) => r.categorie === c) || {}).part_moyenne}));
+    const W = box.clientWidth, H = 240, mT = 26, mB = 30, mL = 8, mR = 8;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    svg.append('text').attr('x', 0).attr('y', 12).attr('font-size', 12).style('fill', 'var(--color-fg)').text(dimension === 'Zone' ? 'Répartition par zone géographique' : 'Répartition par tranche d\'âge');
+    const max = d3.max(data, (d) => Math.max(d.a, d.b || 0)) || 1;
+    const y = d3.scaleLinear([0, max * 1.15], [H - mB, mT]);
+    const x = d3.scaleBand(cats, [mL, W - mR]).padding(0.2);
+    const xi = d3.scaleBand(['a', 'b'], [0, x.bandwidth()]).padding(0.1);
+    const t = tip(box);
+    const g = svg.selectAll('g.c').data(data).join('g').attr('transform', (d) => `translate(${x(d.c)},0)`);
+    g.append('rect').attr('x', xi('a')).attr('width', xi.bandwidth()).attr('y', (d) => y(d.a)).attr('height', (d) => y(0) - y(d.a)).style('fill', 'var(--jo-pink)');
+    g.filter((d) => d.b != null).append('rect').attr('x', xi('b')).attr('width', xi.bandwidth()).attr('y', (d) => y(d.b)).attr('height', (d) => y(0) - y(d.b)).style('fill', 'var(--jo-bar-muted)');
+    g.append('rect').attr('width', x.bandwidth()).attr('y', mT).attr('height', H - mB - mT).style('fill', 'transparent')
+      .on('mousemove', (ev, d) => t.show(ev, [d.c, cur.libelle + ' : ' + f.pct(d.a), 'Moy. 12 éd. préc. : ' + (d.b != null ? f.pct(d.b) : '—')]))
+      .on('mouseleave', () => t.hide());
+    g.append('text').attr('x', xi('a') + xi.bandwidth() / 2).attr('y', (d) => y(d.a) - 4).attr('text-anchor', 'middle').attr('font-size', 10).style('fill', 'var(--color-fg-muted)')
+      .text((d) => (x.bandwidth() > 40 ? fr0(d.a) : ''));
+    const short = {"Petite couronne": 'Pte cour.', 'Grande couronne': 'Gde cour.', 'Étranger / inconnu': 'Étranger'};
+    g.append('text').attr('x', x.bandwidth() / 2).attr('y', H - mB + 14).attr('text-anchor', 'middle').attr('font-size', 10).style('fill', 'var(--color-fg-muted)')
+      .text((d) => (x.bandwidth() < 70 && short[d.c]) ? short[d.c] : d.c);
+    svg.append('line').attr('x1', mL).attr('x2', W - mR).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
+  };
+  const fr0 = window.JO.fr.format('.0%');
+  dash.onData(() => {
+    const ce = current();
+    const pc = dash.data('part_45_74'), cm = document.getElementById('age-comment');
+    const row = (pc.status === 'ok' && ce) ? pc.data.find((r) => r.edition === ce.edition) : null;
+    cm.hidden = !(row && row.part_billets != null);
+    if (row && row.part_billets != null) {
+      const hl = cm.querySelector('.jo-hl');
+      hl.dataset.where = 'edition=' + ce.edition;
+      hl.textContent = f.pct(row.part_billets);
+    }
+    if (ce) {
+      const m = new Date(ce.edition + 'T12:00:00').toLocaleDateString('fr-FR', {month: 'long', year: 'numeric'});
+      document.getElementById('leg-ed').textContent = m.charAt(0).toUpperCase() + m.slice(1);
+    }
+    draw(document.getElementById('chart-zone'), 'Zone', ['Paris', 'Petite couronne', 'Grande couronne', 'Province', 'Étranger / inconnu']);
+    draw(document.getElementById('chart-age'), "Tranche d'âge", ['18-24', '25-34', '35-44', '45-54', '55-64', '65-74', '75+']);
+  });
+})();
+</script>
+
+<script>
+(() => {
+  const {num, f, editions, current} = window.JO;
+  const table = document.getElementById('tab-ed');
+  const tb = table.querySelector('tbody');
+  let sortKey = 'conversion', asc = false;
+  const cols = [
+    ['libelle', (r) => r.libelle], ['acheteurs', (r) => f.int(num(r.acheteurs))], ['billets', (r) => f.int(num(r.billets))], ['ca_ttc', (r) => num(r.ca_ttc) == null ? '' : f.eur(num(r.ca_ttc)) + ' €'],
+    ['panier_moyen', (r) => num(r.panier_moyen) == null ? '' : f.eur2(num(r.panier_moyen)) + ' €'], ['concerts', (r) => r.concerts],
+    ['age_moyen', (r) => num(r.age_moyen) == null ? '' : f.dec1(num(r.age_moyen))], ['delivres_total', (r) => num(r.delivres_total) == null ? '' : f.int(num(r.delivres_total))],
+    ['taux_ouverture_prospects', (r) => num(r.taux_ouverture_prospects) == null ? '' : f.pct(num(r.taux_ouverture_prospects))],
+    ['taux_clic_prospects', (r) => num(r.taux_clic_prospects) == null ? '' : f.pct2(num(r.taux_clic_prospects))],
+    ['conversion', (r) => num(r.conversion) == null ? '' : f.pct2(num(r.conversion))],
+  ];
+  table.querySelectorAll('th').forEach((th) => th.addEventListener('click', () => {
+    const k = th.dataset.field === 'libelle' ? 'edition' : th.dataset.field;
+    if (sortKey === k) asc = !asc; else { sortKey = k; asc = k === 'edition'; }
+    render();
+  }));
+  tb.addEventListener('click', (ev) => { const tr = ev.target.closest('tr[data-key]'); if (tr) { dash.setParams({edition: tr.dataset.key}); document.getElementById('haut').scrollIntoView({behavior: 'smooth'}); } });
+  const render = () => {
+    const cur = current();
+    const rows = editions().slice().sort((a, b) => {
+      const va = sortKey === 'edition' ? a.edition : num(a[sortKey]), vb = sortKey === 'edition' ? b.edition : num(b[sortKey]);
+      if (va == null) return 1; if (vb == null) return -1;
+      return asc ? d3.ascending(va, vb) : d3.descending(va, vb);
+    });
+    table.querySelectorAll('th').forEach((th) => th.setAttribute('aria-sort', ((th.dataset.field === 'libelle' ? 'edition' : th.dataset.field) === sortKey) ? (asc ? 'ascending' : 'descending') : 'none'));
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr');
+      tr.dataset.key = r.edition;
+      if (cur && r.edition === cur.edition) tr.className = 'sel';
+      cols.forEach(([, fn]) => { const td = document.createElement('td'); td.textContent = fn(r); tr.appendChild(td); });
+      return tr;
+    }));
+  };
+  dash.onData(render);
+})();
+</script>
+
+</div>
+</body>
+</html>

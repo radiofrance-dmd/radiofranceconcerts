@@ -1,0 +1,391 @@
+edition,concert,date_concert,billets,ca_ttc,lignes
+2023-10-12,09.11.2023 20:00,2,0,,1
+2023-10-12,DM.31014.Debussy - Stéphanie d'Oustrac / Philippe Jordan,14.10.2023 20:00,23,,12
+2023-10-12,"DM.31015.Bach, Concertos brandebourgeois,Matins du National",15.10.2023 11:00,29,,17
+2023-10-12,"DM.31019.Rachmaninov, Symphonie n°3, Pablo Ferrández/Valčuha",19.10.2023 20:00,18,,11
+2023-10-12,"DM.31020.Haydn / Busoni / Vivier, Barbara Hannigan",20.10.2023 20:00,25,,12
+2023-10-12,"DM.31026.Chorus Line #1 - Stravinsky, Les Noces, Lionel Sow",26.10.2023 20:00,28,,17
+2023-10-12,"DM.31104.INA grm, Akousma",04.11.2023 20:30,4,,2
+2023-10-12,"DM.31105.INA grm, Akousma",05.11.2023 18:00,4,,3
+2023-10-12,"DM.31109.Dvořák, Concerto pour violoncelle, Bruno Philippe",09.11.2023 20:00,21,,12
+2023-10-12,"DM.31110.Dvořák, Symphonie n°8, Anu Komsi / Sakari Oramo",10.11.2023 20:00,17,,11
+2023-10-12,"DM.31112.Bach, L’Art de la fugue, Célimène Daudet",12.11.2023 16:00,21,,13
+2023-10-12,"DM.31114.Brahms, Un Requiem allemand, Vilde Frang / Măcelaru",14.11.2023 20:00,13,,8
+2023-10-12,"DM.JAZZ.31014.Kurt Rosenwinkel Quartet, Yoann Loustalot",14.10.2023 19:00,16,,9
+2023-10-12,"DM.PP.31020.Ravel, Daphnis et Chloé - Sol Gabetta",20.10.2023 20:00,23,,13
+2023-11-16,"DM.31117.Mahler, Symphonie «Titan», Jaap van Zweden",17.11.2023 20:00,9,,6
+2023-11-16,"DM.31118.Classique & mix, Live Electro",18.11.2023 20:00,29,,18
+2023-11-16,"DM.31123.Ligeti #1 - Le Mandarin merveilleux, F Xavier Roth",23.11.2023 20:00,17,,10
+2023-11-16,"DM.31124.Dvořák, «Nouveau monde», Emilia Hoving",24.11.2023 20:00,4,,4
+2023-11-16,"DM.31126.Ligeti #2 - L. Richardot, les Matins du National",26.11.2023 11:00,2,,2
+2023-11-16,"DM.31128.Ligeti #3 Mozart / Ligeti, I. Faust / J.F Neuburger",28.11.2023 20:00,6,,5
+2023-11-16,"DM.31202.Ligeti #4 - Le Grand Macabre, François-Xavier Roth",02.12.2023 20:00,7,,4
+2023-11-16,"DM.31203.Barbara Hannigan, Philhar’Intime",03.12.2023 16:00,39,,21
+2023-11-16,"DM.31208.Tchaïkovski, Symphonie n°5, Simone Young",08.12.2023 20:00,4,,3
+2023-11-16,"DM.31209.Mozart, Grande Messe en ut, Leonardo García Alarcón",09.12.2023 20:00,11,,6
+2023-11-16,"DM.31210.Mozart, Grande Messe en ut, Leonardo García Alarcón",10.12.2023 16:00,10,,7
+2023-11-16,"DM.JAZZ.31118.Umlaut Chamber Orchestra, Blaser/Lossing/Mintz",18.11.2023 19:00,17,,9
+2023-12-14,DM.31217.Chorus Line #2 - Mozart / Haydn,17.12.2023 16:00,28,,16
+2023-12-14,"DM.31219.Bach / Wagner, Vincent Warnier / Paul Zientara",19.12.2023 20:00,22,,14
+2023-12-14,DM.31221.West Side Story,21.12.2023 20:00,13,,7
+2023-12-14,DM.31222.West Side Story,22.12.2023 20:00,13,,9
+2023-12-14,"DM.31230.Un Américain à Paris, Concert du Nouvel An",30.12.2023 20:00,12,,5
+2023-12-14,"DM.31231.Un Américain à Paris, Concert du Nouvel An",31.12.2023 20:00,11,,6
+2023-12-14,"DM.40104.Beethoven, Symphonie n°9, Mikko Franck",04.01.2024 20:00,9,,5
+2023-12-14,"DM.40105.Beethoven, Symphonie n°9, Mikko Franck",05.01.2024 20:00,5,,3
+2023-12-14,"DM.40110.Purcell, Louis-Noël Bestion de Camboulas",10.01.2024 20:00,15,,7
+2023-12-14,"DM.40112.Mozart, Symphonie concertante, Tamestit / Kavakos",12.01.2024 20:00,8,,3
+2023-12-14,"DM.40114.Leonidas Kavakos, Philhar’Intime",14.01.2024 16:00,9,,6
+2023-12-14,"DM.40118.Anniversaire Péter Eötvös, Lambert Wilson",18.01.2024 20:00,11,,7
+2023-12-14,"DM.JAZZ.31216.L Cugny Tentet, Pascal Charrier Kami Octet",16.12.2023 19:00,1,,1
+2023-12-14,"DM.JP.40113.Léna et l'orchestre enchanté, Julie Gayet",13.01.2024 14:30,23,,9
+2024-01-18,DM.40130.Battements de cœur,30.01.2024 20:00,24,,13
+2024-01-18,"DM.40131.Bach, Klezmer et Tango, les Visiteurs du National",31.01.2024 20:00,41,,25
+2024-01-18,DM.40206.Présences #1 - Concert d'ouverture,06.02.2024 20:00,13,,6
+2024-01-18,DM.40208.Présences #3 - Drumming,08.02.2024 20:00,6,,4
+2024-01-18,DM.40209.Présences #5 - It's gonna rain,09.02.2024 20:30,4,,2
+2024-01-18,DM.40210.Présences #6 - Double sextet / Ensemble Next,10.02.2024 15:30,8,,4
+2024-01-18,DM.40210B.Présences #7 - Music for Ensemble and Orchestra,10.02.2024 19:30,24,,10
+2024-01-18,DM.40210C.Présences #8 - City Life,10.02.2024 22:30,9,,5
+2024-01-18,DM.40211.Présences #10 - Different Trains,11.02.2024 16:30,9,,7
+2024-01-18,DM.40211.Présences #9 - Autour de Caroline Shaw,11.02.2024 15:00,5,,3
+2024-01-18,DM.40211C.Présences #11 - Tehilim,11.02.2024 18:30,13,,6
+2024-01-18,"DM.JAZZ.40120.Tous Dehors «OK Boomer», H. Labarrière Puzzle",20.01.2024 19:00,24,,15
+2024-02-15,"DM.40220.Bach, Partita n°6, Edna Stern",20.02.2024 20:00,22,,12
+2024-02-15,"DM.40222.Haendel, les grands airs d'opéra, Sandrine Piau",22.02.2024 20:00,28,,19
+2024-02-15,"DM.40225.Alice Sara Ott, les Matins du National",25.02.2024 11:00,21,,12
+2024-02-15,"DM.40228.Mozart / Grieg, Quatuor Ébène",28.02.2024 20:00,34,,21
+2024-02-15,"DM.40229.Holst, Les Planètes, Daniel Harding",29.02.2024 20:00,12,,7
+2024-02-15,DM.40302.Les Clefs de l'Orchestre de Jean-François Zygel,02.03.2024 14:30,7,,4
+2024-02-15,DM.40302B.Les Clefs de l'Orchestre de Jean-François Zygel,02.03.2024 20:00,6,,4
+2024-02-15,"DM.40305.Bach / Messiaen, Mami Sakato",05.03.2024 20:00,32,,18
+2024-02-15,"DM.40309B.Chorus Line #3 - Scarlatti, Stabat Mater",09.03.2024 20:00,15,,8
+2024-02-15,"DM.40310.Vilde Frang, Philhar'Intime",10.03.2024 16:00,14,,8
+2024-02-15,"DM.40313.Bach / Mozart / Pärt, Kristiina Poska",13.03.2024 20:00,9,,6
+2024-02-15,"DM.40314.Beethoven, Symphonie ""Pastorale""",14.03.2024 20:00,4,,3
+2024-02-15,"DM.JAZZ.40309.Dave Douglas Gifts Quintet, Louise Jallu ""Jeu""",09.03.2024 19:00,19,,11
+2024-02-15,DM.JP.40217.Les Cygnes sauvages,17.02.2024 14:30,8,,5
+2024-02-15,DM.SE.40224 Les Aventures d'Octave et Mélo,24.02.2024 17:00,20,,8
+2024-03-14,"DM.40316.Petrouchka, Vilde Frang / Mikko Franck",16.03.2024 20:00,10,,6
+2024-03-14,"DM.40324.Berlioz, Nuits d'été, les Matins du National",24.03.2024 11:00,16,,12
+2024-03-14,"DM.40324.Berlioz, Nuits d'été, les Matins du National/DM.40409.Chorus Line #4 - Mozart, Requiem, Lionel Sow/DM.40406B.Bach, Passacaille et fugue, Ferrière / Espinasse",24.03.2024 11:00,1,,1
+2024-03-14,"DM.40329.Wagner, Le Ring sans paroles, Kopatchinskaja",29.03.2024 20:00,10,,8
+2024-03-14,"DM.40330.Bizet, Symphonie en ut, Pierre-Laurent Aimard",30.03.2024 20:00,14,,10
+2024-03-14,"DM.40402.Kurt Weill, Sofi Jeannin / Lionel Sow",02.04.2024 20:00,15,,9
+2024-03-14,"DM.40404.Philippe Sarde, Les Choses de la vie",04.04.2024 20:00,13,,7
+2024-03-14,"DM.40406B.Bach, Passacaille et fugue, Ferrière / Espinasse",06.04.2024 20:00,38,,26
+2024-03-14,"DM.40409.Chorus Line #4 - Mozart, Requiem, Lionel Sow",09.04.2024 20:00,6,,4
+2024-03-14,"DM.40410.Sibelius, Symphonies n°1 et n°2",10.04.2024 20:00,25,,17
+2024-03-14,"DM.GRM.ELEC.40329.INA grm, Présences électronique",29.03.2024 20:30,1,,1
+2024-03-14,"DM.GRM.ELEC.40330.INA grm, Présences électronique",30.03.2024 20:30,5,,4
+2024-03-14,"DM.GRM.ELEC.40331.INA grm, Présences électronique",31.03.2024 18:00,5,,2
+2024-04-11,"DM.40412.Sibelius, Symphonies n°5, n°6 et n°7",12.04.2024 20:00,31,,21
+2024-04-11,"DM.40416.Bach, Le Clavier bien tempéré, Livre I",16.04.2024 20:00,29,,14
+2024-04-11,"DM.40417.Bach, Le Clavier bien tempéré, Livre II",17.04.2024 20:00,10,,7
+2024-04-11,"DM.40418.Mozart, Concerto pour violon, James Ehnes",18.04.2024 20:00,15,,8
+2024-04-11,"DM.40430.Schumann, Concerto pour violoncelle",30.04.2024 20:00,23,,14
+2024-04-11,"DM.40507.Bach / Brahms, orgue et violoncelle",07.05.2024 20:00,14,,7
+2024-04-11,DM.FIC.40427B.La Petite Sirène,27.04.2024 17:30,9,,5
+2024-04-11,"DM.PP.40426.Bruckner, Symphonie n°6, Mirga Gražinytė-Tyla",26.04.2024 20:00,13,,8
+2024-05-16,"DM.40524.Beethoven, ""L'Empereur"", Emanuel Ax",24.05.2024 20:00,39,,19
+2024-05-16,"DM.40531.Ravel, La Valse, Victor Julien-Laferrière",31.05.2024 20:00,41,,24
+2024-05-16,"DM.40604.Purcell / Dowland, Lea Desandre",04.06.2024 20:00,12,,8
+2024-05-16,"DM.40607.Bartók, Concerto pour orchestre, Marin Alsop",07.06.2024 20:00,27,,17
+2024-05-16,"DM.40608B.Bach / Haendel, Vilde Frang",08.06.2024 20:00,16,,9
+2024-05-16,"DM.40609.Tarmo Peltokoski, Philhar'Intime",09.06.2024 16:00,26,,12
+2024-05-16,"DM.40613.Gabriel Fauré, Lucas Debargue",13.06.2024 20:00,13,,8
+2024-05-16,DM.SE.40601B.Des histoires originales,01.06.2024 14:30,2,,1
+2024-09-12,"DM.40913.Berlioz, Les Nuits d'été, Lea Desandre",13.09.2024 20:00,27,,18
+2024-09-12,DM.40915.Chorus Line #1 - Concertos pour chœur Lionel Sow,15.09.2024 16:00,9,,5
+2024-09-12,"DM.40922.Les Matins du National, Mozart / Dvořák",22.09.2024 11:00,31,,18
+2024-09-12,"DM.40924.Bach / Mozart / Liszt, Thomas Ospital",24.09.2024 20:00,17,,12
+2024-09-12,"DM.40925.Mozart, Concerto pour piano n°25",25.09.2024 20:00,16,,11
+2024-09-12,DM.41002.Les Clefs de l'orchestre de Jean-François Zygel,02.10.2024 20:00,25,,14
+2024-09-12,DM.41003.Les Clefs de l'orchestre de Jean-François Zygel,03.10.2024 19:00,10,,5
+2024-09-12,"DM.41003B.Smetana, La Moldau, Ariane Matiakh",03.10.2024 20:00,39,,24
+2024-09-12,DM.41005.Pianomania : Chopin / Liszt / Fauré / Ravel,05.10.2024 20:00,9,,5
+2024-09-12,"DM.41006.Bach, Leonardo García Alarcón, Philhar'Intime",06.10.2024 16:00,6,,3
+2024-09-12,"DM.41010.Busoni, Concerto pour piano",10.10.2024 20:00,1,,1
+2024-09-12,"DM.41011.Ligeti / Stravinsky, Barbara Hannigan",11.10.2024 20:00,7,,4
+2024-09-12,"DM.41013.Beethoven, Grande fugue, Quatuor Ebène",13.10.2024 16:00,9,,6
+2024-09-12,"DM.41015.Brahms / Ravel, Beatrice Rana",15.10.2024 20:00,1,,1
+2024-09-12,"DM.FIC.40928.Le Livre de ma mère, Albert Cohen",28.09.2024 20:00,10,,6
+2024-09-12,DM.JAZZ.40914.H. Sellin / J.-P. Celea / D.Humair,14.09.2024 19:00,9,,7
+2024-09-12,"DM.JP.40921.Contrebasse et accordéon, Oli en concert",21.09.2024 11:00,3,,2
+2024-09-12,"DM.JP.40921B.Contrebasse et accordéon, Oli en concert",21.09.2024 14:30,7,,3
+2024-10-17,"DM.41024.Mahler, Symphonie n°2, Cristian Măcelaru",24.10.2024 20:00,16,,9
+2024-10-17,"DM.41025.Mahler, Symphonie n°2, Cristian Măcelaru",25.10.2024 20:00,16,,8
+2024-10-17,"DM.41107B.Chostakovitch / Dutilleux, E. Moreau",07.11.2024 20:00,26,,16
+2024-10-17,"DM.41108.Adagio de Barber, Alice Sara Ott",08.11.2024 20:00,24,,15
+2024-10-17,"DM.GRM ELEC.41101.INA GRM - Présences ""électronique""",01.11.2024 17:00,9,,6
+2024-10-17,"DM.GRM ELEC.41101B.INA GRM - Présences ""électronique""",01.11.2024 19:30,6,,4
+2024-10-17,"DM.GRM ELEC.41101C.INA GRM - Présences ""électronique""",01.11.2024 22:00,5,,4
+2024-10-17,"DM.GRM.ELEC.41103B.INA GRM - Présences ""électronique""",03.11.2024 18:30,8,,6
+2024-10-17,DM.JP.41019.Vassilissa la-très-belle,19.10.2024 14:30,5,,3
+2024-10-17,DM.JP.41019B.Vassilissa la-très-belle,19.10.2024 17:00,7,,4
+2024-10-17,DM.JP.41025C.Les aventures de Tintin - Le Lotus bleu,25.10.2024 17:00,5,,2
+2024-11-14,"DM.41116.Schubert, ""La Grande"", Truls Mørk",16.11.2024 20:00,10,,7
+2024-11-14,"DM.41117.Chorus Line #2 - Brahms / Bruckner, Lionel Sow",17.11.2024 16:00,42,,23
+2024-11-14,"DM.41121B.Bruckner, Symphonie n°7, Philippe Jordan",21.11.2024 20:00,6,,5
+2024-11-14,"DM.41122.Mahler, Kindertotenlieder",22.11.2024 20:00,8,,6
+2024-11-14,"DM.41130.Le Roi du Cirque, Max Linder",30.11.2024 20:00,5,,3
+2024-11-14,"DM.41205.Chorus Line #3 - Fauré, La naissance de Vénus",05.12.2024 20:00,19,,10
+2024-11-14,"DM.41210.Vivaldi, Gloria, Ophélie Gaillard",10.12.2024 20:00,7,,5
+2024-11-14,"DM.41212.Dvořák, Sérénades, Amaury Coeytaux",12.12.2024 20:00,6,,3
+2024-11-14,"DM.JP.41201.Le Roi du Cirque, Max Linder",01.12.2024 16:00,21,,7
+2024-11-14,"DM.PP.41129.Bartók, Le Château de Barbe Bleue",29.11.2024 20:00,10,,6
+2024-11-14,"DM.PP.41206.Rachmaninov, symphonie N°2 / Tugan Sokhiev",06.12.2024 20:00,14,,9
+2024-12-12,"DM.41212.Dvořák, Sérénades, Amaury Coeytaux",12.12.2024 20:00,18,432.0,12
+2024-12-12,"DM.41213B.Prokofiev, Symphonie n°3, Antoine Tamestit",13.12.2024 20:00,21,210.0,16
+2024-12-12,"DM.41215.Bach, Variations Goldberg, Les Matins du National",15.12.2024 11:00,64,956.0,35
+2024-12-12,"DM.41219B.Tchaïkovski, Symphonie n°5",19.12.2024 20:00,26,1233.0,16
+2024-12-12,"DM.41220.Prokofiev, Roméo et Juliette",20.12.2024 20:00,12,417.0,8
+2024-12-12,"DM.41221C.Prokofiev, Roméo et Juliette",21.12.2024 20:00,9,321.0,4
+2024-12-12,"DM.41222.Bach, Préludes et fugues, Trompette et orgue",22.12.2024 16:00,75,1058.0,39
+2024-12-12,"DM.41230.Le Beau Danube bleu, Cristian Măcelaru",30.12.2024 20:00,25,1082.0,13
+2024-12-12,"DM.41231.Le Beau Danube bleu, Cristian Măcelaru",31.12.2024 20:00,19,1306.0,9
+2024-12-12,"DM.50105.Beethoven, Symphonie n°9, Jaap van Zweden",05.01.2025 16:00,23,1114.0,12
+2024-12-12,"DM.50110.Schumann, Concerto pour violon",10.01.2025 20:00,12,432.0,7
+2024-12-12,"DM.50111B.Haendel, Water Music, Ton Koopman",11.01.2025 20:00,16,720.0,8
+2024-12-12,DM.JP.41221.La Grenouille à grande bouche,21.12.2024 14:30,7,70.0,3
+2024-12-12,DM.JP.41221B.La Grenouille à grande bouche,21.12.2024 17:00,19,190.0,4
+2025-01-16,16,,0,,1
+2025-01-16,"DM.50118C.Johann Sebastian Bach, Jean-Luc Ho",18.01.2025 20:00,31,460.0,23
+2025-01-16,"DM.50119.Nikolaï Lugansky, Philhar'intime",19.01.2025 16:00,33,470.0,17
+2025-01-16,"DM.50123.Le Soleil des eaux, J.-E. Bavouzet / Juraj Valčuha",23.01.2025 20:00,35,1058.0,21
+2025-01-16,"DM.50131.Philippe Rombi, Astérix, Joyeux Noël, Potiche",31.01.2025 20:00,11,374.0,8
+2025-01-16,"DM.50213.Chostakovitch, Concerto pour violon / I. Faust",13.02.2025 20:00,29,1001.0,11
+2025-01-16,DM.JP.50118.Elément Terre mon cher Célestin !,18.01.2025 14:30,7,70.0,3
+2025-01-16,DM.JP.50118B.Elément Terre mon cher Célestin !,18.01.2025 17:00,4,40.0,1
+2025-01-16,"DM.JP.50201BL'Histoire du soldat, Igor Stravinsky",01.02.2025 17:00,20,200.0,9
+2025-01-16,"DM.JP.50201L'Histoire du soldat, Igor Stravinsky",01.02.2025 14:30,11,110.0,6
+2025-01-16,"DM.PP.50117.La Walkyrie, Thomas Guggeis",17.01.2025 20:00,18,546.0,11
+2025-01-16,"DM.PP.50207.Présences #4, Neuwirth / Schubert",07.02.2025 20:00,11,197.5,8
+2025-01-16,DM.PRES.50204B.Présences #1 - Concert d'ouverture,04.02.2025 20:00,16,128.0,12
+2025-01-16,DM.PRES.50205.Présences #2 - Quatuor Arditti,05.02.2025 20:00,10,80.0,8
+2025-01-16,DM.PRES.50206.Présences #3 - Eleanor,06.02.2025 20:00,7,56.0,5
+2025-01-16,DM.PRES.50209C.Présences #10 - Concert de clôture,09.02.2025 18:00,7,56.0,5
+2025-01-16,alainheurtier48@gmail.com,33-0183422799,0,,1
+2025-02-13,"DM.50213.Chostakovitch, Concerto pour violon / I. Faust",13.02.2025 20:00,13,546.0,8
+2025-02-13,"DM.50214.Brahms, Symphonie n°2, Cornelius Meister",14.02.2025 20:00,24,1002.0,12
+2025-02-13,"DM.50218.Théotime Langlois de Swarte, Willian Christie",18.02.2025 20:00,55,989.5,37
+2025-02-13,"DM.50222.Bach / Mendelssohn, Matthias Havinga",22.02.2025 20:00,99,792.0,51
+2025-02-13,"DM.50225.Beethoven / Tchaïkovski, Quatuor Ebène",25.02.2025 20:00,66,880.0,36
+2025-02-13,"DM.50227.Elgar, Variations Enigma, R Capuçon / D Harding",27.02.2025 20:00,55,1783.0,32
+2025-02-13,"DM.50302.Marie-Nicole Lemieux, Les Matins du National",02.03.2025 11:00,20,232.5,13
+2025-02-13,DM.50304.Dvořák / Janáček,04.03.2025 20:00,39,312.0,20
+2025-02-13,"DM.50306.Ravel, Boléro, Rapsodie espagnole, Œuvre augmentée",06.03.2025 20:00,20,570.0,13
+2025-02-13,"DM.50307.Chostakovitch, ""Leningrad"", Mikko Franck",07.03.2025 20:00,14,720.0,8
+2025-02-13,"DM.50308B.Bach, Cantates, Leonardo García Alarcón",08.03.2025 20:00,34,862.5,17
+2025-02-13,"DM.50309.Rachmaninov / Ravel, Lilya Zilberstein",09.03.2025 16:00,34,583.0,21
+2025-02-13,DM.GRM.50215.INA grm - Akousma,15.02.2025 20:30,24,120.0,15
+2025-02-13,DM.GRM.50216.INA grm - Akousma,16.02.2025 18:00,35,175.0,21
+2025-03-13,"DM.50314.Scriabine, Poème de l'extase, J Bell / G Gimeno",14.03.2025 20:00,24,886.0,17
+2025-03-13,"DM.50318.Rameau, Dardanus",18.03.2025 20:00,26,785.0,20
+2025-03-13,"DM.50320.Stravinsky, Petrouchka, A Tamestit / M Jacquot",20.03.2025 20:00,24,486.0,15
+2025-03-13,"DM.50322.Bach / César Franck, Michel Bouvard",22.03.2025 20:00,14,212.0,9
+2025-03-13,"DM.50323.Haydn / Mendelssohn / Schubert, Matins du National",23.03.2025 11:00,29,290.0,15
+2025-03-13,"DM.50328.Mahler, Symphonie n°9, Daniele Gatti",28.03.2025 20:00,9,393.0,6
+2025-03-13,"DM.50329C.Bach, Suites pour violoncelle, V Julien-Laferrière",29.03.2025 20:00,34,858.0,16
+2025-03-13,DM.50330.Chorus Line #4 - Brahms / Mendelssohn / Britten,30.03.2025 16:00,58,644.0,31
+2025-03-13,"DM.50402.Mozart / Haydn / Beethoven, Daniele Gatti",02.04.2025 20:00,27,1068.0,14
+2025-03-13,"DM.50406.Zad Moultaka, La Passion selon les enfants",06.04.2025 16:00,7,56.0,3
+2025-03-13,"DM.50410.Beethoven, Symphonie n°5, Kristiina Poska",10.04.2025 20:00,6,222.0,3
+2025-03-13,"DM.50412.Le Mépris, Georges Delerue",12.04.2025 20:00,12,420.0,9
+2025-03-13,"DM.FIC.50315.La Reine des neiges, Concert-fiction",15.03.2025 14:30,5,50.0,3
+2025-03-13,DM.JP.50329.Frissons,29.03.2025 14:30,14,140.0,4
+2025-03-13,DM.JP.50417.Le Voyage d'Ulysse,17.04.2025 17:00,3,30.0,3
+2025-03-13,"DM.PP.50403.Poulenc, La Voix Humaine",03.04.2025 20:00,8,238.0,5
+2025-04-17,"DM.50419.Bach / Dalbavie / Barraine, Lucile Dollat",19.04.2025 20:00,49,392.0,32
+2025-04-17,"DM.50424.Tableaux d'une exposition, Cristian Măcelaru",24.04.2025 20:00,12,486.0,8
+2025-04-17,"DM.50425.Chorus Line #5 - Monteverdi, Vêpres de la Vierge",25.04.2025 20:00,23,767.0,14
+2025-04-17,"DM.50426B.Schumann, Concerto pour violoncelle, N Altstaedt",26.04.2025 20:00,54,1528.0,32
+2025-04-17,"DM.50427.Beatrice Rana, Philhar'Intime",27.04.2025 16:00,47,556.0,28
+2025-04-17,"DM.50429.Bach / Brahms / Liszt, Jonathan Fournel",29.04.2025 20:00,28,643.0,18
+2025-04-17,"DM.50430.Debussy, La Mer, Antoine Tamestit / Mikko Franck",30.04.2025 20:00,15,701.0,8
+2025-04-17,"DM.50507.Douce et Barbe-Bleue, Marie-Noëlle Maerten",07.05.2025 20:00,19,209.0,7
+2025-04-17,"DM.JAZZ.50426.James Brandon Lewis Trio, A. Dolmen Quartet",26.04.2025 19:00,17,561.0,8
+2025-04-17,DM.JP.50417.Le Voyage d'Ulysse,17.04.2025 17:00,14,140.0,6
+2025-04-17,DM.JP.50418.Le Voyage d'Ulysse,18.04.2025 17:00,1,10.0,1
+2025-05-15,"DM.50518.Lucile Dollat, Les Matins du National",18.05.2025 11:00,22,220.0,14
+2025-05-15,"DM.50524.Berg, ""À la mémoire d'un ange"", Kopatchinskaja",24.05.2025 20:00,34,862.5,23
+2025-05-15,"DM.50527.Goyescas de Granados, Javier Perianes",27.05.2025 20:00,23,435.5,12
+2025-05-15,"DM.50603.Birds on a Wire, Le Chant des Oiseaux",03.06.2025 20:00,20,100.0,10
+2025-05-15,"DM.50607.Wagner / Rossini / Haendel, Jeremy Joseph / J Essl",07.06.2025 20:00,12,195.0,8
+2025-05-15,"DM.50613.Chorus Line #6 - Requiem de Duruflé, Lionel Sow",13.06.2025 20:00,2,16.0,1
+2025-05-15,DM.GRM.50530B.INA grm - Akousma,30.05.2025 20:30,8,56.0,5
+2025-05-15,DM.GRM.50531.INA grm - Akousma,31.05.2025 20:30,8,56.0,5
+2025-05-15,DM.GRM.50601.INA grm - Akousma,01.06.2025 18:00,6,42.0,4
+2025-05-15,"DM.JAZZ.50517.Sylvaine Hélary, Antoine Berjeaut",17.05.2025 19:00,5,65.0,3
+2025-06-12,"DM.50613.Chorus Line #6 - Requiem de Duruflé, Lionel Sow",13.06.2025 20:00,6,60.5,5
+2025-06-12,"DM.50613B.Racine, Athalie, La Comédie-Française",13.06.2025 20:00,11,110.0,9
+2025-06-12,"DM.50615.Schubert, ""La Truite"", Philhar'Intime",15.06.2025 16:00,10,215.0,6
+2025-06-12,"DM.50619.Mozart, Symphonie ""Jupiter"", Simone Young",19.06.2025 20:00,20,581.0,12
+2025-06-12,DM.50621.Viva l’Orchestra !,21.06.2025 20:00,72,,38
+2025-06-12,"DM.50624.Musique populaire écossaise, Quatuor Ébène",24.06.2025 20:00,23,274.0,15
+2025-06-12,"DM.50702.Gala Bizet, Bertrand de Billy",02.07.2025 20:00,33,1045.0,22
+2025-06-12,"DM.50703.Requiem for Nature, Tan Dun",03.07.2025 20:00,16,471.0,10
+2025-06-12,"DM.JAZZ.50614.Julien Lourau, Verneri Pohjola",14.06.2025 19:00,21,210.0,12
+2025-09-18,DM.50918.Les Clefs de l’orchestre de Jean-François Zygel,18.09.2025 20:00,6,102.0,4
+2025-09-18,DM.50919.Les Clefs de l’orchestre de Jean-François Zygel,19.09.2025 20:00,16,208.0,8
+2025-09-18,DM.50920.Pianomania,20.09.2025 20:00,63,708.0,36
+2025-09-18,"DM.50921.Brahms, Kian Soltani, Philhar’Intime",21.09.2025 16:00,23,306.0,13
+2025-09-18,"DM.50923.Quatuor Modigliani, Haydn / Beethoven",23.09.2025 20:00,34,496.0,19
+2025-09-18,"DM.50925.Le Roi David, Lambert Wilson / Amira Casar",25.09.2025 20:00,37,1123.0,25
+2025-09-18,"DM.50926.Beethoven / Mahler, Piemontesi / Ticciati",26.09.2025 20:00,21,847.0,12
+2025-09-18,"DM.50928.Bach / Mozart / Wagner, Pieter-Jelle de Boer",28.09.2025 16:00,39,351.0,24
+2025-09-18,"DM.51009.Ravel, L’Heure espagnole, Yamada Kazuki",09.10.2025 20:00,33,1189.0,19
+2025-09-18,"DM.51019.Ravel, Concerto en sol, Jaap van Zweden",19.10.2025 16:00,9,324.0,4
+2025-09-18,"DM.FIC.51004.Blanche-Neige & sortilèges, Concert-fiction",04.10.2025 20:30,9,135.0,6
+2025-09-18,"DM.JAZZ.51011.Immanuel Wilkins Quartet, Jakob Bro Trio",11.10.2025 19:00,9,243.0,6
+2025-09-18,"DM.JP.50927A.Les aventures du prince Rama,Légendes indiennes",27.09.2025 14:30,14,154.0,4
+2025-09-18,"DM.JP.50927B.Les aventures du prince Rama,Légendes indiennes",27.09.2025 17:00,7,77.0,3
+2025-10-16,"DM.51017.Gala Johann Strauss, Dueñas / Honeck",17.10.2025 20:00,30,712.0,18
+2025-10-16,"DM.51018.Gala Johann Strauss, Dueñas / Honeck",18.10.2025 20:00,24,535.0,13
+2025-10-16,"DM.51019.Ravel, Concerto en sol, Jaap van Zweden",19.10.2025 16:00,21,1005.0,12
+2025-10-16,"DM.51021.Mao Fujita, Récital de piano",21.10.2025 20:00,31,823.0,22
+2025-10-16,DM.51025.Duruflé/Liszt/Messiaen/Feierabend-Alma Bettencourt,25.10.2025 20:00,33,297.0,16
+2025-10-16,"DM.51031.INA grm, Akousma",31.10.2025 20:30,13,78.0,8
+2025-10-16,"DM.51101.INA grm, Akousma",01.11.2025 20:30,5,30.0,3
+2025-10-16,"DM.51102.INA grm, Akousma",02.11.2025 18:00,14,84.0,9
+2025-10-16,"DM.51106.Les Tableaux d'une exposition, Altstaedt / Jacquot",06.11.2025 20:00,15,573.0,11
+2025-10-16,"DM.JP.51023.Le Chien des Baskerville, Frissons",23.10.2025 14:30,13,156.0,4
+2025-10-16,"DM.JP.51023A.Le Chien des Baskerville, Frissons",23.10.2025 17:00,7,84.0,3
+2025-10-16,"DM.JP.51024.Le Chien des Baskerville, Frissons",24.10.2025 14:30,5,60.0,2
+2025-10-16,"DM.JP.51024A.Le Chien des Baskerville, Frissons",24.10.2025 17:00,6,72.0,2
+2025-10-16,"DM.JP.51028.Quand les notes se rebellent, Oli en concert",28.10.2025 14:30,14,168.0,6
+2025-10-16,"DM.JP.51029.Quand les notes se rebellent, Oli en concert",29.10.2025 14:30,10,120.0,4
+2025-10-16,"DM.PP.51030.Tchaïkovski, Concerto pour violon Randall Goosby",30.10.2025 20:00,4,261.0,3
+2025-11-13,"DM.51114.Gidon Kremer, Mirga Gražinytė-Tyla",14.11.2025 20:00,54,1636.0,35
+2025-11-13,"DM.51116.Andrei Korobeinikov, Philhar'Intime",16.11.2025 16:00,33,436.0,20
+2025-11-13,"DM.51118.M. Calderini  / G. Kremer, Mirga Gražinytė-Tyla",18.11.2025 20:00,16,696.0,12
+2025-11-13,DM.51120.L’ONF accueille l’Orchestre des jeunes de Roumanie,20.11.2025 20:30,64,704.0,35
+2025-11-13,DM.51121.A.Teliga / A. Korobeinikov / Mirga Gražinytė-Tyla,21.11.2025 20:00,24,672.0,15
+2025-11-13,"DM.51123.Bach, Brandebourgeois, les Dimanches du National",23.11.2025 16:00,20,533.0,16
+2025-11-13,"DM.51128.Mahler / Sinfonia, Centenaire Luciano Berio #1",28.11.2025 20:00,25,530.0,16
+2025-11-13,"DM.51129.Carnaval romain, Daniele Gatti",29.11.2025 20:00,47,1412.0,24
+2025-11-13,"DM.51129.Mahler / Laborintus II, Centenaire Luciano Berio #2",29.11.2025 20:00,6,141.0,4
+2025-11-13,"DM.51204.La Femme sans ombre, Pahud / Gabel",04.12.2025 20:00,21,669.0,14
+2025-11-13,"DM.51206.Chœurs d'enfants, Orgue et piano, Concert de Noël",06.12.2025 20:00,36,699.0,20
+2025-11-13,"DM.51207.Emmanuel Pahud, les Dimanches du National",07.12.2025 16:00,42,541.0,24
+2025-12-04,"DM.51204.La Femme sans ombre, Pahud / Gabel",04.12.2025 20:00,10,280.0,8
+2025-12-04,"DM.51206.Chœurs d'enfants, Orgue et piano, Concert de Noël",06.12.2025 20:00,52,707.0,29
+2025-12-04,"DM.51216.Madrigaux de Monteverdi, Les Cris de Paris",16.12.2025 20:00,21,602.0,16
+2025-12-04,"DM.51220.Bach / Ravel - Brandebourgeois, Boléro",20.12.2025 20:00,15,195.0,8
+2025-12-04,DM.51221.Chantez l'hiver ! Concert participatif,21.12.2025 17:00,26,468.0,15
+2025-12-04,"DM.51231.Concerto d'Aranjuez,T. Garcia,Concert du Nouvel An",31.12.2025 20:00,50,2914.0,29
+2025-12-04,"DM.60101.Concerto d'Aranjuez,T. Garcia,Concert du Nouvel An",01.01.2026 16:00,65,2926.0,31
+2025-12-04,"DM.60103.Beethoven, Symphonie n°9, Maxim Emelyanychev",03.01.2026 20:00,1,50.0,1
+2025-12-04,"DM.60104.Beethoven, Symphonie n°9, Maxim Emelyanychev",04.01.2026 16:00,60,2714.0,33
+2025-12-04,"DM.60109.Bach / Debussy / Stravinsky, Isabelle Demers",09.01.2026 20:00,104,936.0,51
+2025-12-04,"DM.60110.Liszt, Sonate en si mineur, Kirill Gerstein",10.01.2026 20:00,31,815.0,16
+2025-12-04,"DM.60111.Marie-Ange Nguci, Philhar'Intime",11.01.2026 16:00,10,136.0,6
+2025-12-04,"DM.60115.Olivier Greif, Requiem",15.01.2026 20:00,7,96.0,6
+2025-12-04,"DM.JAZZ.60110.Jowee Omicil, Ellinoa",10.01.2026 19:00,29,720.0,16
+2026-01-15,"DM.60118.Clara Schumann / Mozart, les Dimanches du National",18.01.2026 16:00,67,920.0,38
+2026-01-15,"DM.60127.Perbost / Warcollier , Chœur d'enfants",27.01.2026 20:00,33,297.0,17
+2026-01-15,DM.PP.60123.Le Paradis et la Péri / Philippe Jordan,23.01.2026 20:00,50,1558.0,33
+2026-01-15,"DM.PRES.600131.Présences #0, Avant-première",31.01.2026 20:00,1,11.0,1
+2026-01-15,"DM.PRES.60203.Présences #1, Concert d'ouverture",03.02.2026 20:00,18,198.0,12
+2026-01-15,"DM.PRES.60204.Présences #2, La nuit en tête",04.02.2026 20:00,17,187.0,11
+2026-01-15,"DM.PRES.60206.Présences #4, Selfie in the Dark, Musikfabrik",06.02.2026 19:30,8,88.0,3
+2026-01-15,"DM.PRES.60206.Présences #5, Profils, Duo d'Albronn/Ferrière",06.02.2026 22:30,3,33.0,2
+2026-01-15,"DM.PRES.60207.Présences #6, Tingel Tangel",07.02.2026 15:30,10,110.0,6
+2026-01-15,"DM.PRES.60207.Présences #7, Tales of a summer sea",07.02.2026 20:00,23,253.0,13
+2026-01-15,"DM.PRES.60208.Présences #10, Black Light",08.02.2026 17:00,3,33.0,2
+2026-01-15,"DM.PRES.60208.Présences #11, Concert de clôture",08.02.2026 18:30,14,154.0,10
+2026-01-15,"DM.PRES.60208.Présences #9, Folk Songs",08.02.2026 15:00,14,154.0,9
+2026-01-15,DM.PRES.JP.60201.Zig Bang,01.02.2026 11:00,10,110.0,5
+2026-01-15,"DM.TCE.PRES.60205.Présences #3,Quatuor Diotima",05.02.2026 20:00,52,1254.0,33
+2026-02-12,"DM.60213.INA grm, PRÉSENCES électronique",13.02.2026 20:30,37,222.0,28
+2026-02-12,"DM.60213.Musique pour cordes, percussion et célesta",13.02.2026 20:00,33,1397.0,21
+2026-02-12,"DM.60214.INA grm, PRÉSENCES électronique",14.02.2026 20:30,27,162.0,23
+2026-02-12,"DM.60215.INA grm, PRÉSENCES électronique",15.02.2026 18:00,30,180.0,22
+2026-02-12,"DM.60220.Jeanne d’Arc au bûcher, Arthur Honegger",20.02.2026 20:00,70,2146.0,44
+2026-02-12,DM.60224.Bach / Mozart / Messiaen / Rivet - Sarah Kim,24.02.2026 20:00,84,756.0,50
+2026-02-12,"DM.60308.Schubert / Schumann, Adam Laloum",08.03.2026 16:00,66,1608.0,40
+2026-02-12,"DM.60310.Stephen Layton, Choral masterpieces",10.03.2026 20:00,28,392.0,16
+2026-02-12,DM.JP.60221.Les aventures d’Octave et Mélo le long de la riv,21.02.2026 14:30,15,180.0,5
+2026-02-12,DM.JP.60221A.Les aventures d’Octave et Mélo le long de la ri,21.02.2026 17:00,27,324.0,12
+2026-02-12,DM.JP.60307A.Contes et merveilles de Brocéliande,07.03.2026 14:30,31,372.0,11
+2026-02-12,DM.JP.60307B.Contes et merveilles de Brocéliande,07.03.2026 17:00,41,492.0,16
+2026-02-12,DM.SCO.60306.Contes et merveilles de Brocéliande,06.03.2026 14:00,7,84.0,3
+2026-03-12,"DM.60314.Frank Peter Zimmermann, Fantaisies et variations",14.03.2026 20:00,33,609.0,23
+2026-03-12,"DM.60321.Rachmaninov / Tan Dun, Messina / Măcelaru",21.03.2026 20:00,29,955.0,16
+2026-03-12,"DM.60322.Alma Bettencourt, Philhar’Intime",22.03.2026 16:00,37,500.0,21
+2026-03-12,"DM.60326.Rachmaninov, Symphonie n°1, Stanislav Kochanovsky",26.03.2026 20:00,18,666.0,11
+2026-03-12,"DM.60329.Adrien La Marca, les Dimanches du National",29.03.2026 16:00,37,506.0,22
+2026-03-12,"DM.60402.Dvořák, Symphonie n°7, Oksana Lyniv",02.04.2026 20:00,37,1310.0,23
+2026-03-12,"DM.60403.Stravinsky, L’Oiseau de feu, Alain Altinoglu",03.04.2026 20:00,33,1295.0,17
+2026-03-12,"DM.60404.Quatuor Modigliani, Beethoven / Brahms / Kurtág",04.04.2026 20:00,26,562.0,13
+2026-03-12,"DM.60409.Pierre et le Loup, Tan Dun",09.04.2026 20:00,24,844.0,12
+2026-03-12,"DM.60410.Sibelius, Symphonie n°7, Thomas Adès",10.04.2026 20:00,21,832.0,13
+2026-03-12,"DM.60411.Grandir en musique #1, Concert participatif",11.04.2026 20:00,34,204.0,17
+2026-03-12,"DM.60412.Maîtrise All Stars, le concert événement",12.04.2026 16:00,36,490.0,17
+2026-04-16,"DM.60417.Mozart / Bartók / Schoenberg, Matthias Pintscher",17.04.2026 20:00,27,1183.0,19
+2026-04-16,"DM.60419.Mozart, Quintette avec clarinette, Philhar'Intime",19.04.2026 16:00,39,470.0,24
+2026-04-16,"DM.60421.Mozart / Saint-Saëns / Escaich, Quatuor Tchalik",21.04.2026 20:00,117,1053.0,65
+2026-04-16,"DM.60424.Stabat Mater, Lionel Sow",24.04.2026 20:00,23,316.0,17
+2026-04-16,"DM.60430.Beethoven, Concerto pour violon, Zimmermann",30.04.2026 20:00,7,317.0,7
+2026-04-16,DM.60505.Bach / Brahms / Liszt / Wolf - Stéphane Bois,05.05.2026 20:00,34,306.0,18
+2026-04-16,"DM.60507.Beethoven, Concerto pour violon, Zimmermann",07.05.2026 20:00,32,1174.0,16
+2026-04-16,"DM.60516.INA grm, Akousma",16.05.2026 20:30,7,42.0,5
+2026-04-16,"DM.60517.INA grm, Akousma",17.05.2026 18:00,13,78.0,7
+2026-04-16,"DM.60519.Quatuor Modigliani, Souvenir de Florence",19.05.2026 20:00,20,335.0,11
+2026-04-16,"DM.JAZZ.60425.Marc Ribot, Couturier / Pifarély",25.04.2026 19:00,21,553.0,14
+2026-04-16,"DM.JP.60423.Violette et les marionnettes, Oli en concert",23.04.2026 14:30,50,600.0,19
+2026-04-16,"DM.JP.60424.Violette et les marionnettes, Oli en concert",24.04.2026 15:00,17,204.0,6
+2026-04-16,"DM.PP.60429.Mozart, Concerto N°21 Fujita / Zweden",29.04.2026 20:00,19,1071.0,12
+2026-05-21,"DM.60521.Grands airs de Carmen, Arquez / Behr / Cavallier",21.05.2026 20:00,32,990.0,22
+2026-05-21,"DM.60522.Grands airs de Carmen, Arquez / Behr / Cavallier",22.05.2026 20:00,46,1340.0,27
+2026-05-21,"DM.60524.Fantaisies de Purcell, Lucile Boulanger",24.05.2026 16:00,25,380.0,16
+2026-05-21,"DM.60528.La Petite Sirène, Thomas Guggeis",28.05.2026 20:00,39,809.0,23
+2026-05-21,"DM.60602.Gardiens de phare, Ciné-Concert orgue",02.06.2026 20:00,19,354.0,10
+2026-05-21,"DM.60605.Mozart, Symphonie « Haffner », Baldeyrou / Leleux",05.06.2026 20:00,22,661.0,14
+2026-05-21,"DM.60607.Marie-Ange Nguci, Les Dimanches du National",07.06.2026 16:00,33,450.0,18
+2026-05-21,"DM.60611.Elgar, Concerto pour violoncelle, Kian Soltani",11.06.2026 20:00,41,1120.0,27
+2026-05-21,"DM.60613.Pinocchio, Thierry Lalo",13.06.2026 14:30,12,168.0,6
+2026-05-21,"DM.60614.Barbara Hannigan, Philhar'Intime",14.06.2026 16:00,45,732.0,28
+2026-05-21,DM.FIC.60604. Cinna de Corneille,04.06.2026 20:00,59,826.0,36
+2026-05-21,"DM.PP.60612.Britten, War Requiem, Mirga Gražinytė-Tyla",12.06.2026 20:00,13,575.0,10
+2026-06-11,"DM.60611.Elgar, Concerto pour violoncelle, Kian Soltani",11.06.2026 20:00,26,615.0,23
+2026-06-11,"DM.60613.Pinocchio, Thierry Lalo",13.06.2026 14:30,23,234.0,10
+2026-06-11,"DM.60614.Barbara Hannigan, Philhar'Intime",14.06.2026 16:00,32,420.0,25
+2026-06-11,"DM.60619.Stravinsky, Le Sacre du printemps, Jaap van Zweden",19.06.2026 20:00,31,1342.0,20
+2026-06-11,"DM.60620.Stravinsky, Le Sacre du printemps, Jaap van Zweden",20.06.2026 20:00,30,1397.0,17
+2026-06-11,"DM.60625.Alexandre Nevski, Frank Strobel",25.06.2026 20:00,26,726.0,20
+2026-06-11,"DM.60626.Tacet, Concerto pour violon,Patricia Kopatchinskaja",26.06.2026 20:00,20,270.0,13
+2026-06-11,"DM.60702.Berlioz, Messe solennelle, Dinis Sousa",02.07.2026 20:00,27,831.0,20
+2026-06-11,DM.60703.Orchestre à l'école,03.07.2026 20:00,15,90.0,8
+2026-09-17,"DM.60917.Brahms, Concerto pour piano n°1",17.09.2026 20:00,31,1237.0,20
+2026-09-17,"DM.60918.Elias de Mendelssohn, Maxim Emelyanychev",18.09.2026 20:00,48,1414.0,34
+2026-09-17,"DM.60919.Bach / Schubert / Chopin, Pianomania",19.09.2026 20:00,54,812.0,28
+2026-09-17,"DM.60923.Œuvre augmentée, Shéhérazade et hip hop",23.09.2026 20:00,38,1005.0,24
+2026-09-17,"DM.60924.Rimski-Korsakov, Shéhérazade, Sergey Khachatryan",24.09.2026 20:00,69,2128.0,38
+2026-09-17,"DM.60927.Le Bach du dimanche, les 10 ans de l'émission",27.09.2026 16:00,31,469.0,19
+2026-09-17,"DM.61001.Mozart,Concerto pour pianon°25,Emanuel Ax/ Järvi",01.10.2026 20:00,33,1290.0,19
+2026-09-17,"DM.61004.Schumann, Quatuor avec piano, Ax,Philhar’Intime",04.10.2026 16:00,46,636.0,26
+2026-09-17,"DM.61008.Chopin, Concerto pour piano n°2, Pletnev/Järvi",08.10.2026 20:00,22,916.0,13
+2026-09-17,"DM.61009.Saint-Saëns, Symphonie avec orgue, Mørk / Yamada",09.10.2026 20:00,28,1059.0,16
+2026-09-17,"DM.61010.Saint-Saëns, Symphonie avec orgue, Mørk / Yamada",10.10.2026 20:00,30,958.0,18
+2026-09-17,"DM.61015.Beethoven, Missa Solemnis, Petr Popelka",15.10.2026 20:00,4,112.0,3
+2026-09-17,"DM.JAZZ.61010.The James Carter Quartet, Stéphane Guillaume",10.10.2026 19:00,17,536.0,10
+2026-09-17,"DM.PP.60925.Wagner, Tristan et Isolde, Jaap van Zweden",25.09.2026 20:00,20,774.0,14
+2026-10-15,"DM.61016.Ravel, Concerto pour la main gauche, centenaire",16.10.2026 20:00,17,749.0,14
+2026-10-15,"DM.61018.Schumann / Kurtág, Pierre-Laurent Aimard, Philhar'",18.10.2026 16:00,24,312.0,16
+2026-10-15,"DM.61020.Scarlatti, Stabat Mater, La Grande Chapelle",20.10.2026 20:00,30,894.0,19
+2026-10-15,"DM.61022.Quatre Derniers Lieder, Christiane Karg / Stasevska",22.10.2026 20:00,26,743.0,18
+2026-10-15,"DM.61023.CHLOÉ / Vassilena Serafimova, Classique & mix avec",23.10.2026 20:00,14,357.0,10
+2026-10-15,"DM.61024.Chopin / Beethoven, Arielle Beck",24.10.2026 20:00,27,723.0,17
+2026-10-15,"DM.61030.INA grm, Akousma",30.10.2026 20:30,15,90.0,10
+2026-10-15,"DM.61031.INA grm, Akousma",31.10.2026 20:30,6,36.0,4
+2026-10-15,"DM.61101.INA grm, Akousma",01.11.2026 18:00,13,78.0,8
+2026-10-15,"DM.61107.Bach, Messe Brève, Sofi Jeannin",07.11.2026 20:00,13,307.0,8
+2026-10-15,"DM.61115.Schubert / Chopin, Emanuel Ax",15.11.2026 16:00,6,164.0,3
+2026-10-15,"DM.61118.Avoaha, Chœur et percussions",18.11.2026 20:00,11,152.0,8
+2026-10-15,"DM.FIC.61106A.Cendrillon, Concert-fiction France Culture",06.11.2026 20:30,8,96.0,4
+2026-10-15,"DM.FIC.61107A.Cendrillon, Concert-fiction France Culture",07.11.2026 14:00,14,168.0,9
+2026-10-15,"DM.FIC.61107B.Cendrillon, Concert-fiction France Culture",07.11.2026 17:00,2,24.0,1
+2026-10-15,"DM.JAZZ.61114.Paolo Fresu Devil Quartet, Diego Imbert Sextet",14.11.2026 19:00,8,240.0,6
+2026-10-15,"DM.JP.61017A.Marguerite, Légendes orientales",17.10.2026 14:30,7,84.0,4
+2026-10-15,"DM.JP.61017B.Marguerite, Légendes orientales",17.10.2026 17:00,18,216.0,10
