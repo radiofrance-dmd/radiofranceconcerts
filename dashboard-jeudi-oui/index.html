@@ -182,7 +182,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
             <th data-field="panier_moyen">Panier moyen</th>
             <th data-field="concerts">Concerts éligibles</th>
             <th data-field="age_moyen">Âge moyen des acheteurs</th>
-            <th data-field="delivres_total">Nb emails envoyés</th>
             <th data-field="taux_ouverture_prospects">Taux d'ouverture (cible prospects)</th>
             <th data-field="taux_clic_prospects">Taux de clics (cible prospects)</th>
             <th data-field="conversion">Taux de conversion</th>
@@ -624,7 +623,7 @@ dash.calc('part_45_74', {
   const cols = [
     ['libelle', (r) => r.libelle], ['acheteurs', (r) => f.int(num(r.acheteurs))], ['billets', (r) => f.int(num(r.billets))], ['ca_ttc', (r) => num(r.ca_ttc) == null ? '' : f.eur(num(r.ca_ttc)) + ' €'],
     ['panier_moyen', (r) => num(r.panier_moyen) == null ? '' : f.eur2(num(r.panier_moyen)) + ' €'], ['concerts', (r) => r.concerts],
-    ['age_moyen', (r) => num(r.age_moyen) == null ? '' : f.dec1(num(r.age_moyen))], ['delivres_total', (r) => num(r.delivres_total) == null ? '' : f.int(num(r.delivres_total))],
+    ['age_moyen', (r) => num(r.age_moyen) == null ? '' : f.dec1(num(r.age_moyen))],
     ['taux_ouverture_prospects', (r) => num(r.taux_ouverture_prospects) == null ? '' : f.pct(num(r.taux_ouverture_prospects))],
     ['taux_clic_prospects', (r) => num(r.taux_clic_prospects) == null ? '' : f.pct2(num(r.taux_clic_prospects))],
     ['conversion', (r) => num(r.conversion) == null ? '' : f.pct2(num(r.conversion))],
