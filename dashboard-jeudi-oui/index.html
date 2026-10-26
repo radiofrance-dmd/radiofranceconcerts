@@ -322,7 +322,7 @@ dash.calc('part_45_74', {
   const sel = document.getElementById('jo-ed');
   const ind = document.getElementById('jo-ind');
   sel.addEventListener('change', () => dash.setParams({edition: sel.value}));
-  ind.replaceChildren(...METRICS.map((m) => new Option(m.sub ? m.lab + ' (' + m.sub + ')' : m.lab, m.k)));
+  ind.replaceChildren(...METRICS.filter((m) => m.k !== 'delivres_total').map((m) => new Option(m.sub ? m.lab + ' (' + m.sub + ')' : m.lab, m.k)));
   ind.addEventListener('change', () => dash.setParams({indicateur: ind.value}));
   if (!dash.params().indicateur) dash.setParams({indicateur: 'acheteurs'});
 
