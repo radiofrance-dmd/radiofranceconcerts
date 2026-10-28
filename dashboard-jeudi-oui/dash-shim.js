@@ -26,7 +26,7 @@
     setLink: () => {}, refresh: () => {},
     colors: ['#ec0d78', '#bb12e1', '#f805cd', '#eb3757', '#6f2fc5', '#ff7ab8', '#8a8a8a', '#1a1a1a'],
   };
-  Promise.all(Object.entries(SOURCES).map(([id, url]) => d3.csv(url).then((rows) => { store[id] = {status: 'ok', data: rows, columns: rows.columns}; })
+  Promise.all(Object.entries(SOURCES).map(([id, url]) => d3.csv(url, {cache: 'no-cache'}).then((rows) => { store[id] = {status: 'ok', data: rows, columns: rows.columns}; })
     .catch((e) => { store[id] = {status: 'error', data: [], message: String(e)}; })))
     .then(() => { computeCalcs(); run(); });
   let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 150); });
