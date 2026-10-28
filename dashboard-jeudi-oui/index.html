@@ -410,17 +410,20 @@ dash.calc('part_45_74', {
   const note = document.getElementById('ind-note');
   const NOTES = {
     ca_ttc: 'Montants disponibles à partir de décembre 2024.', panier_moyen: 'Montants disponibles à partir de décembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de décembre 2024.',
-    taux_clic_prospects: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
-    taux_ouverture_prospects: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    taux_clic_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    taux_ouverture_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
     delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
     conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis octobre 2023.',
-    taux_ouverture_anciens: 'Données emailing disponibles depuis octobre 2023.',
-    taux_clic_anciens: 'Données emailing disponibles depuis octobre 2023.',
+    taux_ouverture_anciens: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés.',
+    taux_clic_anciens: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés.',
     part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure. Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les premières éditions.',
   };
+  const HIST = ['taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens'];
   dash.onData(() => {
-    const eds = editions();
     const k = dash.params().indicateur || 'acheteurs';
+    // KPI emailing d'avant la base Secutix (oct. 2021 - juin 2023) : affichés seulement pour ces 4 indicateurs
+    const hist = dash.data('crm_historique');
+    const eds = (HIST.includes(k) && hist.status === 'ok' ? hist.data.map((r) => ({...r, hist: true})) : []).concat(editions());
     const m = byKey[k];
     note.textContent = NOTES[k] || '';
     const cur = current();
@@ -446,9 +449,9 @@ dash.calc('part_45_74', {
     g.selectAll('rect.bar').data(eds.filter((e) => num(e[k]) != null)).join('rect')
       .attr('x', (e) => x(e.edition)).attr('width', x.bandwidth()).attr('y', (e) => y(num(e[k]))).attr('height', (e) => y(0) - y(num(e[k])))
             .style('fill', (e) => (cur && e.edition === cur.edition) ? 'var(--jo-pink)' : 'var(--jo-bar-muted)')
-      .style('cursor', 'pointer')
-      .on('click', (ev, e) => dash.setParams({edition: e.edition}))
-      .on('mousemove', (ev, e) => t.show(ev, [e.libelle, (m.sub ? m.lab + ' (' + m.sub + ')' : m.lab) + ' : ' + m.fmt(num(e[k]))]))
+      .style('cursor', (e) => e.hist ? 'default' : 'pointer')
+      .on('click', (ev, e) => { if (!e.hist) dash.setParams({edition: e.edition}); })
+      .on('mousemove', (ev, e) => t.show(ev, [e.hist ? e.libelle + ' (emailing seul)' : e.libelle, (m.sub ? m.lab + ' (' + m.sub + ')' : m.lab) + ' : ' + m.fmt(num(e[k]))]))
       .on('mouseleave', () => t.hide());
     // moyenne des 12 éditions précédant l'édition choisie
     if (cur && cmp.status === 'ok') {
