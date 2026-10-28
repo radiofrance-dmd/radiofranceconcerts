@@ -171,7 +171,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
   <section class="jo-sec" id="historique">
     <h2>Toutes les éditions</h2>
     <div class="jo-card">
-      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis décembre 2024, emailing depuis novembre 2024.</p>
+      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis décembre 2024, emailing depuis octobre 2023.</p>
       <div class="jo-tablewrap">
         <table id="tab-ed" data-source="editions" data-row-key="edition">
           <thead><tr>
@@ -208,6 +208,7 @@ window.JO = (() => {
     {k: 'part_reachat', lab: 'La part de ceux ayant déjà acheté lors d\'une précédente édition', fmt: (v) => f.pct(v), rate: true},
     {k: 'taux_clic_prospects', lab: 'Taux de clics', sub: 'cible prospects', fmt: (v) => f.pct2(v), rate: true},
     {k: 'taux_ouverture_prospects', lab: 'Taux d\'ouverture', sub: 'cible prospects', fmt: (v) => f.pct(v), rate: true},
+    {k: 'taux_ouverture_anciens', lab: 'Taux d\'ouverture', sub: 'cible anciens acheteurs', fmt: (v) => f.pct(v), rate: true},
     {k: 'taux_clic_anciens', lab: 'Taux de clics', sub: 'cible anciens acheteurs', fmt: (v) => f.pct(v), rate: true},
     {k: 'conversion', lab: 'Taux de conversion (acheteurs / nb emails envoyés)', fmt: (v) => f.pct2(v), rate: true},
     {k: 'delivres_total', lab: 'Nb emails envoyés', fmt: (v) => f.int(v), rate: false},
@@ -254,8 +255,8 @@ dash.calc('comparatifs', {
   description: 'Pour chaque édition et indicateur : valeur, édition précédente, moyenne des 12 éditions précédentes et écarts (relatif pour les volumes, en points pour les taux).',
   inputs: ['editions'],
   fn: (editions) => {
-    const keys = ['acheteurs', 'billets', 'ca_ttc', 'panier_moyen', 'part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_clic_anciens', 'conversion', 'delivres_total', 'prix_moyen_billet', 'concerts', 'age_moyen'];
-    const rates = ['part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_clic_anciens', 'conversion'];
+    const keys = ['acheteurs', 'billets', 'ca_ttc', 'panier_moyen', 'part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens', 'conversion', 'delivres_total', 'prix_moyen_billet', 'concerts', 'age_moyen'];
+    const rates = ['part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens', 'conversion'];
     const n = (v) => (v === '' || v == null) ? null : +v;
     const eds = editions.slice().sort((a, b) => (a.edition < b.edition ? -1 : 1));
     const out = [];
@@ -409,16 +410,20 @@ dash.calc('part_45_74', {
   const note = document.getElementById('ind-note');
   const NOTES = {
     ca_ttc: 'Montants disponibles à partir de décembre 2024.', panier_moyen: 'Montants disponibles à partir de décembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de décembre 2024.',
-    taux_clic_prospects: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
-    taux_ouverture_prospects: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
-    delivres_total: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
-    conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis novembre 2024.',
-    taux_clic_anciens: 'Données emailing disponibles depuis novembre 2024.',
+    taux_clic_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    taux_ouverture_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
+    conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis octobre 2023.',
+    taux_ouverture_anciens: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés.',
+    taux_clic_anciens: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés.',
     part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure. Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les premières éditions.',
   };
+  const HIST = ['taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens'];
   dash.onData(() => {
-    const eds = editions();
     const k = dash.params().indicateur || 'acheteurs';
+    // KPI emailing d'avant la base Secutix (oct. 2021 - juin 2023) : affichés seulement pour ces 4 indicateurs
+    const hist = dash.data('crm_historique');
+    const eds = (HIST.includes(k) && hist.status === 'ok' ? hist.data.map((r) => ({...r, hist: true})) : []).concat(editions());
     const m = byKey[k];
     note.textContent = NOTES[k] || '';
     const cur = current();
@@ -444,9 +449,9 @@ dash.calc('part_45_74', {
     g.selectAll('rect.bar').data(eds.filter((e) => num(e[k]) != null)).join('rect')
       .attr('x', (e) => x(e.edition)).attr('width', x.bandwidth()).attr('y', (e) => y(num(e[k]))).attr('height', (e) => y(0) - y(num(e[k])))
             .style('fill', (e) => (cur && e.edition === cur.edition) ? 'var(--jo-pink)' : 'var(--jo-bar-muted)')
-      .style('cursor', 'pointer')
-      .on('click', (ev, e) => dash.setParams({edition: e.edition}))
-      .on('mousemove', (ev, e) => t.show(ev, [e.libelle, (m.sub ? m.lab + ' (' + m.sub + ')' : m.lab) + ' : ' + m.fmt(num(e[k]))]))
+      .style('cursor', (e) => e.hist ? 'default' : 'pointer')
+      .on('click', (ev, e) => { if (!e.hist) dash.setParams({edition: e.edition}); })
+      .on('mousemove', (ev, e) => t.show(ev, [e.hist ? e.libelle + ' (emailing seul)' : e.libelle, (m.sub ? m.lab + ' (' + m.sub + ')' : m.lab) + ' : ' + m.fmt(num(e[k]))]))
       .on('mouseleave', () => t.hide());
     // moyenne des 12 éditions précédant l'édition choisie
     if (cur && cmp.status === 'ok') {
@@ -479,7 +484,7 @@ dash.calc('part_45_74', {
     tb.replaceChildren(...rows.map((r) => {
       const tr = document.createElement('tr');
       tr.dataset.key = encodeURIComponent(r.edition) + ',' + encodeURIComponent(r.segment);
-      [r.segment, f.int(num(r.delivres)), f.int(num(r.ouvreurs)), f.int(num(r.cliqueurs)), f.pct(num(r.taux_ouverture)), f.pct2(num(r.taux_clic)), f.pct(num(r.reactivite)), f.int(num(r.desabonnements)), f.pct2(num(r.taux_desabo))]
+      [r.segment, ...[[f.int, r.delivres], [f.int, r.ouvreurs], [f.int, r.cliqueurs], [f.pct, r.taux_ouverture], [f.pct2, r.taux_clic], [f.pct, r.reactivite], [f.int, r.desabonnements], [f.pct2, r.taux_desabo]].map(([fmt, v]) => num(v) == null ? '–' : fmt(num(v)))]
         .forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
       return tr;
     }));
