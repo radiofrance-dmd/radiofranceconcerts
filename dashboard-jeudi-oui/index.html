@@ -208,6 +208,7 @@ window.JO = (() => {
     {k: 'part_reachat', lab: 'La part de ceux ayant déjà acheté lors d\'une précédente édition', fmt: (v) => f.pct(v), rate: true},
     {k: 'taux_clic_prospects', lab: 'Taux de clics', sub: 'cible prospects', fmt: (v) => f.pct2(v), rate: true},
     {k: 'taux_ouverture_prospects', lab: 'Taux d\'ouverture', sub: 'cible prospects', fmt: (v) => f.pct(v), rate: true},
+    {k: 'taux_ouverture_anciens', lab: 'Taux d\'ouverture', sub: 'cible anciens acheteurs', fmt: (v) => f.pct(v), rate: true},
     {k: 'taux_clic_anciens', lab: 'Taux de clics', sub: 'cible anciens acheteurs', fmt: (v) => f.pct(v), rate: true},
     {k: 'conversion', lab: 'Taux de conversion (acheteurs / nb emails envoyés)', fmt: (v) => f.pct2(v), rate: true},
     {k: 'delivres_total', lab: 'Nb emails envoyés', fmt: (v) => f.int(v), rate: false},
@@ -254,8 +255,8 @@ dash.calc('comparatifs', {
   description: 'Pour chaque édition et indicateur : valeur, édition précédente, moyenne des 12 éditions précédentes et écarts (relatif pour les volumes, en points pour les taux).',
   inputs: ['editions'],
   fn: (editions) => {
-    const keys = ['acheteurs', 'billets', 'ca_ttc', 'panier_moyen', 'part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_clic_anciens', 'conversion', 'delivres_total', 'prix_moyen_billet', 'concerts', 'age_moyen'];
-    const rates = ['part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_clic_anciens', 'conversion'];
+    const keys = ['acheteurs', 'billets', 'ca_ttc', 'panier_moyen', 'part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens', 'conversion', 'delivres_total', 'prix_moyen_billet', 'concerts', 'age_moyen'];
+    const rates = ['part_reachat', 'taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens', 'conversion'];
     const n = (v) => (v === '' || v == null) ? null : +v;
     const eds = editions.slice().sort((a, b) => (a.edition < b.edition ? -1 : 1));
     const out = [];
@@ -413,7 +414,8 @@ dash.calc('part_45_74', {
     taux_ouverture_prospects: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
     delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
     conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis octobre 2023.',
-    taux_clic_anciens: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024).',
+    taux_ouverture_anciens: 'Données emailing disponibles depuis octobre 2023.',
+    taux_clic_anciens: 'Données emailing disponibles depuis octobre 2023.',
     part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure. Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les premières éditions.',
   };
   dash.onData(() => {
