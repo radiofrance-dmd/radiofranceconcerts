@@ -1,4 +1,22 @@
 edition,libelle,segment,cibles,envoyes,delivres,ouvreurs,cliqueurs,desabonnements,taux_ouverture,taux_clic,reactivite,taux_desabo
+2023-10-12,oct. 2023,Anciens acheteurs (J-1),,,2963,1236,581,,0.4171,0.1961,0.4701,
+2023-10-12,oct. 2023,Prospects opt-in concert (jour J),,,82291,17199,2386,,0.209,0.029,0.1387,
+2023-11-16,nov. 2023,Anciens acheteurs (J-1),,,2617,1135,560,,0.4337,0.214,0.4934,
+2023-11-16,nov. 2023,Prospects opt-in concert (jour J),,,82064,19720,2872,,0.2403,0.035,0.1456,
+2023-12-14,déc. 2023,Anciens acheteurs (J-1),,,2905,1229,622,,0.4231,0.2141,0.5061,
+2023-12-14,déc. 2023,Prospects opt-in concert (jour J),,,82423,17474,2308,,0.212,0.028,0.1321,
+2024-01-18,janv. 2024,Anciens acheteurs (J-1),,,2916,1263,664,,0.4331,0.2277,0.5257,
+2024-01-18,janv. 2024,Prospects opt-in concert (jour J),,,81967,18770,2746,,0.229,0.0335,0.1463,
+2024-02-15,févr. 2024,Anciens acheteurs (J-1),,,3028,1541,606,,0.5089,0.2001,0.3933,
+2024-02-15,févr. 2024,Prospects opt-in concert (jour J),,,81507,15356,2135,,0.1884,0.0262,0.139,
+2024-03-14,mars 2024,Anciens acheteurs (J-1),,,3104,1230,593,,0.3963,0.191,0.4821,
+2024-04-11,avr. 2024,Anciens acheteurs (J-1),,,3049,1222,553,,0.4008,0.1814,0.4525,
+2024-04-11,avr. 2024,Prospects opt-in concert (jour J),,,80081,16425,1586,,0.2051,0.0198,0.0966,
+2024-05-16,mai 2024,Anciens acheteurs (J-1),,,3060,1237,531,,0.4042,0.1735,0.4293,
+2024-05-16,mai 2024,Prospects opt-in concert (jour J),,,81035,17625,1645,,0.2175,0.0203,0.0933,
+2024-09-12,sept. 2024,Anciens acheteurs (J-1),,,3080,1278,584,,0.4149,0.1896,0.457,
+2024-10-17,oct. 2024,Anciens acheteurs (J-1),,,3082,1174,609,,0.3809,0.1976,0.5187,
+2024-10-17,oct. 2024,Prospects opt-in concert (jour J),,,79487,13115,1757,,0.165,0.0221,0.134,
 2024-11-14,nov. 2024,Anciens acheteurs (J-1),3524,3084,3080,1305,621,4,0.4237,0.2016,0.4759,0.0013
 2024-11-14,nov. 2024,Prospects opt-in concert (jour J),82951,79302,78977,17665,1775,157,0.2237,0.0225,0.1005,0.00199
 2024-12-12,déc. 2024,Anciens acheteurs (J-1),3523,3085,3080,1177,547,0,0.3821,0.1776,0.4647,0.0

@@ -171,7 +171,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
   <section class="jo-sec" id="historique">
     <h2>Toutes les éditions</h2>
     <div class="jo-card">
-      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis décembre 2024, emailing depuis novembre 2024.</p>
+      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis décembre 2024, emailing depuis octobre 2023.</p>
       <div class="jo-tablewrap">
         <table id="tab-ed" data-source="editions" data-row-key="edition">
           <thead><tr>
@@ -409,11 +409,11 @@ dash.calc('part_45_74', {
   const note = document.getElementById('ind-note');
   const NOTES = {
     ca_ttc: 'Montants disponibles à partir de décembre 2024.', panier_moyen: 'Montants disponibles à partir de décembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de décembre 2024.',
-    taux_clic_prospects: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
-    taux_ouverture_prospects: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
-    delivres_total: 'Données emailing disponibles depuis novembre 2024. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
-    conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis novembre 2024.',
-    taux_clic_anciens: 'Données emailing disponibles depuis novembre 2024.',
+    taux_clic_prospects: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    taux_ouverture_prospects: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
+    conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis octobre 2023.',
+    taux_clic_anciens: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024).',
     part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure. Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les premières éditions.',
   };
   dash.onData(() => {
@@ -479,7 +479,7 @@ dash.calc('part_45_74', {
     tb.replaceChildren(...rows.map((r) => {
       const tr = document.createElement('tr');
       tr.dataset.key = encodeURIComponent(r.edition) + ',' + encodeURIComponent(r.segment);
-      [r.segment, f.int(num(r.delivres)), f.int(num(r.ouvreurs)), f.int(num(r.cliqueurs)), f.pct(num(r.taux_ouverture)), f.pct2(num(r.taux_clic)), f.pct(num(r.reactivite)), f.int(num(r.desabonnements)), f.pct2(num(r.taux_desabo))]
+      [r.segment, ...[[f.int, r.delivres], [f.int, r.ouvreurs], [f.int, r.cliqueurs], [f.pct, r.taux_ouverture], [f.pct2, r.taux_clic], [f.pct, r.reactivite], [f.int, r.desabonnements], [f.pct2, r.taux_desabo]].map(([fmt, v]) => num(v) == null ? '–' : fmt(num(v)))]
         .forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
       return tr;
     }));
