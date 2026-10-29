@@ -48,6 +48,10 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 .jo-sec h2::after { content: ""; display: block; width: 48px; height: 6px; margin-top: 8px; background: var(--jo-grad); }
 .jo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-lg); }
 .jo-grid[hidden], .jo-card[hidden], .jo-prov-bar[hidden], .jo-prov-leg[hidden] { display: none; }
+.jo-seasons { display: flex; flex-wrap: wrap; gap: var(--cds-gap-lg) var(--cds-gap-xl); }
+.jo-season { display: flex; flex-direction: column; gap: 2px; min-width: 12rem; }
+.jo-season .v { font-weight: 900; font-size: 40px; line-height: 1.1; }
+.jo-season .s { font-size: 14px; color: var(--jo-grey); }
 .jo-card { border-top: 1px solid var(--jo-ink); border-bottom: 6px solid var(--jo-ink); padding: 16px 0 20px; min-width: 0; display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
 .jo-card h3 { margin: 0; font-weight: 900; font-size: 20px; line-height: 1.2; }
 .jo-kicker { font-size: 13px; text-transform: uppercase; margin: 0; }
@@ -181,6 +185,14 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
       </div>
       <p class="jo-note" id="ind-note"></p>
       <div class="jo-chart" id="chart-evol" data-source="editions"></div>
+    </div>
+  </section>
+
+  <section class="jo-sec" id="part-offre">
+    <h2>Part des billets achetés grâce à l'offre</h2>
+    <div class="jo-card">
+      <div class="jo-seasons" id="seasons" data-source="saisons"></div>
+      <p class="jo-note">Billets Jeudi Oui divisés par l'ensemble des billets payants achetés dans la saison par les participants à l'offre (concerts de la Direction de la musique, invitations exclues). Calculé depuis les exports Secutix, disponibles à partir de la saison 2025-26.</p>
     </div>
   </section>
 
@@ -721,6 +733,25 @@ dash.calc('part_45_74', {
   });
 })();
 </script>
+<script>
+(() => {
+  const {num, f} = window.JO;
+  const box = document.getElementById('seasons');
+  dash.onData(() => {
+    const d = dash.data('saisons');
+    if (d.status !== 'ok') return;
+    box.replaceChildren(...d.data.slice().reverse().map((r) => {
+      const el = document.createElement('div'); el.className = 'jo-season';
+      const k = document.createElement('p'); k.className = 'jo-kicker'; k.textContent = 'Saison ' + r.saison + (num(r.complete) ? '' : ' (en cours)');
+      const v = document.createElement('div'); v.className = 'v'; v.textContent = f.pct(num(r.part_offre));
+      const s = document.createElement('div'); s.className = 's';
+      s.textContent = f.int(num(r.billets_jeudi_oui)) + ' billets Jeudi Oui sur ' + f.int(num(r.billets_total)) + ', ' + f.int(num(r.participants)) + ' participants';
+      el.append(k, v, s); return el;
+    }));
+  });
+})();
+</script>
+
 
 
 

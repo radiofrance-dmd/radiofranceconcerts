@@ -5,6 +5,7 @@
     profils: 'data/jeudi_oui_profils.csv', categories: 'data/jeudi_oui_categories.csv',
     crm_historique: 'data/jeudi_oui_crm_historique.csv',
     provenance: 'data/jeudi_oui_provenance.csv',
+    saisons: 'data/jeudi_oui_saisons.csv',
   };
   const store = {}, calcs = {}, listeners = [];
   let params = {edition: null, indicateur: 'acheteurs'};
