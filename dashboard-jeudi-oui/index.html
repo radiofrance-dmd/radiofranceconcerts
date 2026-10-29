@@ -745,8 +745,7 @@ dash.calc('part_45_74', {
       const k = document.createElement('p'); k.className = 'jo-kicker'; k.textContent = 'Saison ' + r.saison + (num(r.complete) ? '' : ' (en cours)');
       const v = document.createElement('div'); v.className = 'v'; v.textContent = f.pct(num(r.part_offre));
       const s = document.createElement('div'); s.className = 's';
-      s.textContent = num(r.billets_total) == null ? f.int(num(r.billets_jeudi_oui)) + ' billets Jeudi Oui'
-        : f.int(num(r.billets_jeudi_oui)) + ' billets Jeudi Oui sur ' + f.int(num(r.billets_total)) + ', ' + f.int(num(r.participants)) + ' participants';
+      s.textContent = f.int(num(r.billets_jeudi_oui)) + ' billets Jeudi Oui';
       el.append(k, v, s); return el;
     }));
   });
