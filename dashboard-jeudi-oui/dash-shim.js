@@ -4,6 +4,8 @@
     editions: 'data/jeudi_oui_editions.csv', crm: 'data/jeudi_oui_crm.csv', concerts: 'data/jeudi_oui_concerts.csv',
     profils: 'data/jeudi_oui_profils.csv', categories: 'data/jeudi_oui_categories.csv',
     crm_historique: 'data/jeudi_oui_crm_historique.csv',
+    provenance: 'data/jeudi_oui_provenance.csv',
+    saisons: 'data/jeudi_oui_saisons.csv',
   };
   const store = {}, calcs = {}, listeners = [];
   let params = {edition: null, indicateur: 'acheteurs'};
