@@ -139,7 +139,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
       </div>
       <p class="jo-note" id="crm-empty" hidden>Pas de données emailing pour cette édition (campagnes archivées).</p>
       <div class="jo-prov" id="provenance">
-        <p class="jo-kicker">Provenance des achats</p>
+        <p class="jo-kicker">Répartition des ventes par segment</p>
         <div class="jo-prov-bar" role="img"></div>
         <ul class="jo-prov-leg"></ul>
         <p class="jo-note" id="prov-note"></p>
@@ -703,7 +703,7 @@ dash.calc('part_45_74', {
     bar.hidden = leg.hidden = !r;
     if (!r) {
       bar.replaceChildren(); leg.replaceChildren();
-      note.textContent = 'Provenance des achats connue d\'octobre 2023 à juin 2025 seulement (bilans marketing).';
+      note.textContent = 'Répartition des ventes par segment non disponible pour cette édition.';
       return;
     }
     const tot = num(r.acheteurs) || 1;
@@ -717,7 +717,7 @@ dash.calc('part_45_74', {
       tx.textContent = s.lab + ' : ' + f.int(num(r[s.k])) + ' acheteurs (' + f.pct(num(r[s.k]) / tot) + ')' + c;
       li.append(sw, tx); return li;
     }));
-    note.textContent = 'Acheteurs ayant acheté depuis chaque email (bilans marketing). Taux de conversion = acheteurs venus de l\'email / emails délivrés de cette cible.' + (segs.length < 3 ? ' Pas d\'email prospects ce mois-ci.' : '');
+    note.textContent = 'Acheteurs venus de chaque email : bilans marketing jusqu\'à juin 2025, puis acheteurs ayant cliqué sur l\'email (croisement Secutix et Actito). Taux de conversion = acheteurs venus de l\'email / emails délivrés de cette cible.' + (segs.length < 3 ? ' Pas d\'email prospects ce mois-ci.' : '');
   });
 })();
 </script>
