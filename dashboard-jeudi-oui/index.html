@@ -47,10 +47,17 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 .jo-sec h2 { font-weight: 900; font-size: 24px; line-height: 1.15; margin: 0 0 var(--cds-gap-md); }
 .jo-sec h2::after { content: ""; display: block; width: 48px; height: 6px; margin-top: 8px; background: var(--jo-grad); }
 .jo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-lg); }
+.jo-grid[hidden], .jo-card[hidden], .jo-prov-bar[hidden], .jo-prov-leg[hidden] { display: none; }
 .jo-card { border-top: 1px solid var(--jo-ink); border-bottom: 6px solid var(--jo-ink); padding: 16px 0 20px; min-width: 0; display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
 .jo-card h3 { margin: 0; font-weight: 900; font-size: 20px; line-height: 1.2; }
 .jo-kicker { font-size: 13px; text-transform: uppercase; margin: 0; }
 .jo-note { margin: 0; font-family: var(--jo-serif); font-style: italic; font-size: 14px; line-height: 1.35; color: var(--jo-grey); }
+.jo-prov { display: flex; flex-direction: column; gap: var(--cds-gap-sm); margin-top: var(--cds-gap-md); }
+.jo-prov-bar { display: flex; height: 22px; width: 100%; }
+.jo-prov-bar > span { display: block; height: 100%; min-width: 2px; }
+.jo-prov-leg { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 14px; }
+.jo-prov-leg li { display: flex; align-items: center; gap: 6px; }
+.jo-prov-leg i { display: inline-block; width: 12px; height: 12px; flex: none; }
 .jo-chart { position: relative; min-height: 260px; }
 .jo-comment { margin: 0; font-size: 15px; line-height: 1.4; }
 .jo-comment .jo-hl { font-weight: 900; color: #ec0d78; }
@@ -82,7 +89,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 </style>
 <script src="d3.min.js"></script>
-<script src="dash-shim.js?v=2026-10-28"></script>
+<script src="dash-shim.js?v=2026-10-29"></script>
 </head>
 <body>
 <div id="dash-root">
@@ -127,10 +134,19 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
         </table>
       </div>
       <p class="jo-note" id="crm-empty" hidden>Pas de données emailing pour cette édition (campagnes archivées).</p>
+      <div class="jo-prov" id="provenance">
+        <p class="jo-kicker">Provenance des achats</p>
+        <div class="jo-prov-bar" role="img"></div>
+        <ul class="jo-prov-leg"></ul>
+        <p class="jo-note" id="prov-note"></p>
+      </div>
     </div>
   </section>
 
   <section class="jo-sec" id="concerts-profils">
+    <div class="jo-card" id="detail-empty" hidden>
+      <p class="jo-note">Pas de détail des ventes pour cette édition : seul le nombre d'acheteurs est connu, d'après le bilan marketing. Concerts, catégories de places et profils ne sont pas disponibles.</p>
+    </div>
     <div class="jo-grid">
       <div class="jo-card" id="concerts">
         <p class="jo-kicker">Focus sur la sélection du mois</p>
@@ -171,7 +187,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
   <section class="jo-sec" id="historique">
     <h2>Toutes les éditions</h2>
     <div class="jo-card">
-      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis décembre 2024, emailing depuis octobre 2023.</p>
+      <p class="jo-note">Classement par taux de conversion, du meilleur au moins bon. Cliquez sur un titre de colonne pour changer le tri, ou sur une ligne pour afficher l'édition dans tout le tableau de bord. CA disponible depuis novembre 2024, emailing depuis octobre 2023.</p>
       <div class="jo-tablewrap">
         <table id="tab-ed" data-source="editions" data-row-key="edition">
           <thead><tr>
@@ -409,7 +425,7 @@ dash.calc('part_45_74', {
   const box = document.getElementById('chart-evol');
   const note = document.getElementById('ind-note');
   const NOTES = {
-    ca_ttc: 'Montants disponibles à partir de décembre 2024.', panier_moyen: 'Montants disponibles à partir de décembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de décembre 2024.',
+    ca_ttc: 'Montants disponibles à partir de novembre 2024 (novembre 2024 : CA total seulement, d\'après le bilan marketing).', panier_moyen: 'Montants disponibles à partir de novembre 2024 (novembre 2024 : CA total seulement, d\'après le bilan marketing).', prix_moyen_billet: 'Montants disponibles à partir de novembre 2024 (novembre 2024 : CA total seulement, d\'après le bilan marketing).',
     taux_clic_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
     taux_ouverture_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
     delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
@@ -626,7 +642,7 @@ dash.calc('part_45_74', {
   const tb = table.querySelector('tbody');
   let sortKey = 'conversion', asc = false;
   const cols = [
-    ['libelle', (r) => r.libelle], ['acheteurs', (r) => f.int(num(r.acheteurs))], ['billets', (r) => f.int(num(r.billets))], ['ca_ttc', (r) => num(r.ca_ttc) == null ? '' : f.eur(num(r.ca_ttc)) + ' €'],
+    ['libelle', (r) => r.libelle], ['acheteurs', (r) => f.int(num(r.acheteurs))], ['billets', (r) => num(r.billets) == null ? '' : f.int(num(r.billets))], ['ca_ttc', (r) => num(r.ca_ttc) == null ? '' : f.eur(num(r.ca_ttc)) + ' €'],
     ['panier_moyen', (r) => num(r.panier_moyen) == null ? '' : f.eur2(num(r.panier_moyen)) + ' €'], ['concerts', (r) => r.concerts],
     ['age_moyen', (r) => num(r.age_moyen) == null ? '' : f.dec1(num(r.age_moyen))],
     ['taux_ouverture_prospects', (r) => num(r.taux_ouverture_prospects) == null ? '' : f.pct(num(r.taux_ouverture_prospects))],
@@ -658,6 +674,55 @@ dash.calc('part_45_74', {
   dash.onData(render);
 })();
 </script>
+<script>
+(() => {
+  const {num, f, current} = window.JO;
+  const box = document.getElementById('provenance');
+  const bar = box.querySelector('.jo-prov-bar'), leg = box.querySelector('.jo-prov-leg'), note = document.getElementById('prov-note');
+  const SEGS = [
+    {k: 'mail_anciens', lab: 'Email anciens acheteurs', conv: 'conversion_anciens', color: 'var(--jo-pink)'},
+    {k: 'mail_prospects', lab: 'Email prospects', conv: 'conversion_prospects', color: '#6f2fc5'},
+    {k: 'autre', lab: 'Hors emails', conv: null, color: 'var(--jo-bar-muted)'},
+  ];
+  dash.onData(() => {
+    const d = dash.data('provenance');
+    const cur = current();
+    const r = (d.status === 'ok' && cur) ? d.data.find((x) => x.edition === cur.edition) : null;
+    bar.hidden = leg.hidden = !r;
+    if (!r) {
+      bar.replaceChildren(); leg.replaceChildren();
+      note.textContent = 'Provenance des achats connue d\'octobre 2023 à juin 2025 seulement (bilans marketing).';
+      return;
+    }
+    const tot = num(r.acheteurs) || 1;
+    const segs = SEGS.filter((s) => num(r[s.k]) != null);
+    bar.replaceChildren(...segs.map((s) => { const el = document.createElement('span'); el.style.width = (100 * num(r[s.k]) / tot) + '%'; el.style.background = s.color; return el; }));
+    bar.setAttribute('aria-label', segs.map((s) => s.lab + ' ' + f.pct(num(r[s.k]) / tot)).join(', '));
+    leg.replaceChildren(...segs.map((s) => {
+      const li = document.createElement('li'), sw = document.createElement('i'), tx = document.createElement('span');
+      sw.style.background = s.color;
+      const c = s.conv && num(r[s.conv]) != null ? ' · taux de conversion ' + f.pct2(num(r[s.conv])) : '';
+      tx.textContent = s.lab + ' : ' + f.int(num(r[s.k])) + ' acheteurs (' + f.pct(num(r[s.k]) / tot) + ')' + c;
+      li.append(sw, tx); return li;
+    }));
+    note.textContent = 'Acheteurs ayant acheté depuis chaque email (bilans marketing). Taux de conversion = acheteurs venus de l\'email / emails délivrés de cette cible.' + (segs.length < 3 ? ' Pas d\'email prospects ce mois-ci.' : '');
+  });
+})();
+</script>
+<script>
+(() => {
+  // Édition sans détail des ventes (juin 2024) : on remplace les trois focus par une note
+  const {num, current} = window.JO;
+  const grid = document.querySelector('#concerts-profils .jo-grid'), msg = document.getElementById('detail-empty');
+  dash.onData(() => {
+    const cur = current();
+    const partial = !!cur && num(cur.billets) == null;
+    grid.hidden = partial; msg.hidden = !partial;
+  });
+})();
+</script>
+
+
 
 </div>
 </body>
