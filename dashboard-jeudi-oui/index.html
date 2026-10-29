@@ -717,7 +717,7 @@ dash.calc('part_45_74', {
       tx.textContent = s.lab + ' : ' + f.int(num(r[s.k])) + ' acheteurs (' + f.pct(num(r[s.k]) / tot) + ')' + c;
       li.append(sw, tx); return li;
     }));
-    note.textContent = 'Acheteurs venus de chaque email : bilans marketing jusqu\'à juin 2025, puis acheteurs ayant cliqué sur l\'email (croisement Secutix et Actito). Taux de conversion = acheteurs venus de l\'email / emails délivrés de cette cible.' + (segs.length < 3 ? ' Pas d\'email prospects ce mois-ci.' : '');
+    note.textContent = segs.length < 3 ? 'Pas d\'email prospects ce mois-ci.' : '';
   });
 })();
 </script>
