@@ -417,16 +417,13 @@ dash.calc('part_45_74', {
       const up = (r) => r.ecart_moyenne >= 0;
       const ref = 'la moyenne des 12 éditions précédentes';
       const hasA = a && a.ecart_moyenne != null, hasC = c && c.ecart_moyenne != null;
-      const pA = hasA ? `${f.int(num(cur.acheteurs))}, soit ${gapText(a, 'ecart_moyenne')}` : '';
-      const pC = hasC ? `${f.eur(num(cur.ca_ttc))}\u00a0€, soit ${gapText(c, 'ecart_moyenne')}` : '';
-      if (hasA && hasC && up(a) === up(c)) {
-        s += ` Le nombre d'acheteurs de cette édition (${pA}) et le chiffre d'affaires (${pC}) sont ${up(a) ? 'supérieurs' : 'inférieurs'} à ${ref}.`;
-      } else if (hasA && hasC) {
-        s += ` Le nombre d'acheteurs de cette édition (${pA}) est ${up(a) ? 'supérieur' : 'inférieur'} à ${ref}, et le chiffre d'affaires (${pC}) lui est ${up(c) ? 'supérieur' : 'inférieur'}.`;
+      const nA = f.int(num(cur.acheteurs)), nC = hasC ? f.eur(num(cur.ca_ttc)) + '\u00a0€' : '';
+      if (hasA && hasC) {
+        s += ` Cette édition compte ${nA} acheteurs pour ${nC} de chiffre d'affaires, soit respectivement ${gapText(a, 'ecart_moyenne')} et ${gapText(c, 'ecart_moyenne')} par rapport à ${ref}.`;
       } else if (hasA) {
-        s += ` Le nombre d'acheteurs de cette édition (${pA}) est ${up(a) ? 'supérieur' : 'inférieur'} à ${ref}.`;
+        s += ` Cette édition compte ${nA} acheteurs, soit ${gapText(a, 'ecart_moyenne')} par rapport à ${ref}.`;
       } else if (hasC) {
-        s += ` Le chiffre d'affaires de cette édition (${pC}) est ${up(c) ? 'supérieur' : 'inférieur'} à ${ref}.`;
+        s += ` Le chiffre d'affaires de cette édition atteint ${nC}, soit ${gapText(c, 'ecart_moyenne')} par rapport à ${ref}.`;
       }
       take.textContent = s.trim() || (parts[0] + '.');
     } else if (st !== 'loading') { take.classList.remove('dash-skeleton'); take.textContent = '—'; }
