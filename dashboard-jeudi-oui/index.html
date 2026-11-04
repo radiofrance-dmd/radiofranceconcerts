@@ -468,7 +468,7 @@ dash.calc('part_45_74', {
     {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', color: 'var(--jo-bar-muted)'},
   ];
   const RUPTURE = '2025-09-01'; // changement de méthode de calcul
-  const SEG_NOTE = 'Jusqu\'à juin 2025, répartition reprise des bilans marketing. Depuis septembre 2025, elle est calculée en croisant les acheteurs avec les clics sur les emails : un acheteur qui a cliqué l\'email anciens acheteurs compte dans ce segment, sinon dans prospects s\'il a cliqué l\'email prospects, sinon hors emails. Les deux méthodes ne sont pas strictement comparables : la hausse de la part hors emails à partir de septembre 2025 peut venir en partie de ce changement. Octobre 2024 : pas de données. Mars et septembre 2024 : pas d\'email prospects.';
+  const SEG_NOTE = 'Octobre 2024 : pas de données. Mars et septembre 2024 : pas d\'email prospects.';
   modeBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => dash.setParams({seg_mode: b.dataset.mode})));
   leg.replaceChildren(...SEG.map((s) => { const sp = document.createElement('span'), i = document.createElement('i'); i.style.background = s.color; sp.append(i, s.lab); return sp; }));
   const drawSegments = () => {
