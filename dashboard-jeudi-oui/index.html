@@ -24,6 +24,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
   --jo-ink: var(--color-fg); --jo-grey: var(--color-fg-muted); --jo-pink: #ec0d78; --jo-magenta: #e000c8; --jo-violet: #6f2fc5;
   --jo-bar-muted: color-mix(in srgb, var(--color-fg) 18%, transparent);
   --jo-grad: linear-gradient(115deg, #6f2fc5 0%, #bb12e1 18%, #f805cd 42%, #ec0d78 72%, #eb3757 100%);
+  --jo-grad-light: linear-gradient(115deg, rgb(111 47 197 / .4) 0%, rgb(187 18 225 / .4) 18%, rgb(248 5 205 / .4) 42%, rgb(236 13 120 / .4) 72%, rgb(235 55 87 / .4) 100%);
   display: flex; flex-direction: column; gap: var(--cds-gap-xl); font-family: var(--jo-sans); font-variant-numeric: tabular-nums; color: var(--jo-ink); }
 .jo-hero { background: var(--jo-grad); color: #fff; padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 48px); }
 .jo-hero-in { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--cds-gap-md); max-width: 46rem; margin-inline: auto; }
@@ -465,11 +466,11 @@ dash.calc('part_45_74', {
   const SEG = [
     {k: 'mail_anciens', lab: 'Email (cible anciens acheteurs)', color: 'var(--jo-pink)'},
     {k: 'mail_prospects', lab: 'Email (cible prospects)', color: '#6f2fc5'},
-    {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', color: 'var(--jo-bar-muted)'},
+    {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', color: 'url(#jo-grad-autre)', bg: 'var(--jo-grad-light)'},
   ];
   const SEG_NOTE = 'Octobre 2024 : pas de données. Mars et septembre 2024 : pas d\'email prospects.';
   modeBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => dash.setParams({seg_mode: b.dataset.mode})));
-  leg.replaceChildren(...SEG.map((s) => { const sp = document.createElement('span'), i = document.createElement('i'); i.style.background = s.color; sp.append(i, s.lab); return sp; }));
+  leg.replaceChildren(...SEG.map((s) => { const sp = document.createElement('span'), i = document.createElement('i'); i.style.background = s.bg || s.color; sp.append(i, s.lab); return sp; }));
   const drawSegments = () => {
     const mode = dash.params().seg_mode === 'nombre' ? 'nombre' : 'part';
     modeBox.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
@@ -488,6 +489,8 @@ dash.calc('part_45_74', {
     });
     const W = box.clientWidth, H = 270, mL = 8, mR = 8, mT = 16, mB = 34;
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+    const lg = svg.append('defs').append('linearGradient').attr('id', 'jo-grad-autre').attr('x1', 0).attr('y1', 0).attr('x2', 1).attr('y2', 1);
+    [[0, '#6f2fc5'], [0.18, '#bb12e1'], [0.42, '#f805cd'], [0.72, '#ec0d78'], [1, '#eb3757']].forEach(([o, c]) => lg.append('stop').attr('offset', o).attr('stop-color', c).attr('stop-opacity', 0.4));
     const fmt = mode === 'part' ? window.JO.fr.format('.0%') : f.int;
     const y = d3.scaleLinear([0, mode === 'part' ? 1 : (d3.max(data, (d) => d.top) || 1) * 1.1], [H - mB, mT]);
     const ticks = y.ticks(4);
@@ -506,7 +509,7 @@ dash.calc('part_45_74', {
     col.selectAll('rect').data((d) => d.parts).join('rect').attr('width', x.bandwidth()).attr('y', (p) => y(p.y1)).attr('height', (p) => Math.max(0, y(p.y0) - y(p.y1))).style('fill', (p) => p.s.color);
     if (cur && byEd.has(cur.edition)) {
       const d = data.find((x0) => x0.e.edition === cur.edition);
-      g.append('rect').attr('x', x(cur.edition) - 1.5).attr('width', x.bandwidth() + 3).attr('y', y(d.top) - 1.5).attr('height', y(0) - y(d.top) + 1.5).style('fill', 'none').style('stroke', 'var(--color-fg)').attr('stroke-width', 2).style('pointer-events', 'none');
+      g.append('rect').attr('x', x(cur.edition) - 3.5).attr('width', x.bandwidth() + 7).attr('y', y(d.top) - 3.5).attr('height', y(0) - y(d.top) + 3.5).style('fill', 'none').style('stroke', 'var(--jo-pink)').attr('stroke-width', 2).style('pointer-events', 'none');
     }
     g.selectAll('text.nd').data(data.filter((d) => !d.r)).join('text').attr('x', (d) => x(d.e.edition) + x.bandwidth() / 2).attr('y', y(0) - 4).attr('text-anchor', 'middle').attr('font-size', 10).style('fill', 'var(--color-fg-muted)').text('n.d.');
     const lw = 52, step = Math.max(1, Math.ceil(lw / x.step()));
@@ -763,7 +766,7 @@ dash.calc('part_45_74', {
   const SEGS = [
     {k: 'mail_anciens', lab: 'Email anciens acheteurs', conv: 'conversion_anciens', color: 'var(--jo-pink)'},
     {k: 'mail_prospects', lab: 'Email prospects', conv: 'conversion_prospects', color: '#6f2fc5'},
-    {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', conv: null, color: 'var(--jo-bar-muted)'},
+    {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', conv: null, color: 'var(--jo-grad-light)'},
   ];
   dash.onData(() => {
     const d = dash.data('provenance');
