@@ -467,7 +467,6 @@ dash.calc('part_45_74', {
     {k: 'mail_prospects', lab: 'Email (cible prospects)', color: '#6f2fc5'},
     {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', color: 'var(--jo-bar-muted)'},
   ];
-  const RUPTURE = '2025-09-01'; // changement de méthode de calcul
   const SEG_NOTE = 'Octobre 2024 : pas de données. Mars et septembre 2024 : pas d\'email prospects.';
   modeBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => dash.setParams({seg_mode: b.dataset.mode})));
   leg.replaceChildren(...SEG.map((s) => { const sp = document.createElement('span'), i = document.createElement('i'); i.style.background = s.color; sp.append(i, s.lab); return sp; }));
@@ -487,7 +486,7 @@ dash.calc('part_45_74', {
       const parts = SEG.map((s, i) => { const val = mode === 'part' ? v[i] / tot : v[i]; const p = {s, n: v[i], p: v[i] / tot, y0: acc, y1: acc + val}; acc += val; return p; });
       return {e, r, tot, parts, top: acc};
     });
-    const W = box.clientWidth, H = 280, mL = 8, mR = 8, mT = 30, mB = 34;
+    const W = box.clientWidth, H = 270, mL = 8, mR = 8, mT = 16, mB = 34;
     const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
     const fmt = mode === 'part' ? window.JO.fr.format('.0%') : f.int;
     const y = d3.scaleLinear([0, mode === 'part' ? 1 : (d3.max(data, (d) => d.top) || 1) * 1.1], [H - mB, mT]);
@@ -510,14 +509,6 @@ dash.calc('part_45_74', {
       g.append('rect').attr('x', x(cur.edition) - 1.5).attr('width', x.bandwidth() + 3).attr('y', y(d.top) - 1.5).attr('height', y(0) - y(d.top) + 1.5).style('fill', 'none').style('stroke', 'var(--color-fg)').attr('stroke-width', 2).style('pointer-events', 'none');
     }
     g.selectAll('text.nd').data(data.filter((d) => !d.r)).join('text').attr('x', (d) => x(d.e.edition) + x.bandwidth() / 2).attr('y', y(0) - 4).attr('text-anchor', 'middle').attr('font-size', 10).style('fill', 'var(--color-fg-muted)').text('n.d.');
-    // rupture de méthode
-    const i = eds.findIndex((e) => e.edition >= RUPTURE);
-    if (i > 0) {
-      const xb = (x(eds[i - 1].edition) + x.bandwidth() + x(eds[i].edition)) / 2;
-      g.append('line').attr('x1', xb).attr('x2', xb).attr('y1', mT - 18).attr('y2', H - mB).style('stroke', 'var(--color-fg)').attr('stroke-dasharray', '4 3');
-      g.append('text').attr('x', xb - 6).attr('y', mT - 10).attr('text-anchor', 'end').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text('Bilans marketing');
-      g.append('text').attr('x', xb + 6).attr('y', mT - 10).attr('text-anchor', 'start').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text('Croisement achats / clics');
-    }
     const lw = 52, step = Math.max(1, Math.ceil(lw / x.step()));
     g.selectAll('text.xt').data(eds.filter((e, j) => j % step === (eds.length - 1) % step)).join('text')
       .attr('x', (e) => x(e.edition) + x.bandwidth() / 2).attr('y', H - mB + 16).attr('text-anchor', 'middle').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text((e) => e.libelle);
