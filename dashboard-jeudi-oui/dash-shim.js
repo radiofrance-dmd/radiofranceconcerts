@@ -8,7 +8,7 @@
     saisons: 'data/jeudi_oui_saisons.csv',
   };
   const store = {}, calcs = {}, listeners = [];
-  let params = {edition: null, indicateur: 'acheteurs'};
+  let params = {edition: null, indicateur: 'segments'};
   const run = () => listeners.forEach((fn) => { try { fn(); } catch (e) { console.error(e); } });
   const computeCalcs = () => {
     Object.entries(calcs).forEach(([id, c]) => {
@@ -24,7 +24,7 @@
     calc: (id, def) => { calcs[id] = def; },
     params: () => ({...params}),
     setParams: (p) => { params = {...params, ...p}; run(); },
-    resetParams: () => { params = {edition: null, indicateur: 'acheteurs'}; run(); },
+    resetParams: () => { params = {edition: null, indicateur: 'segments'}; run(); },
     setLink: () => {}, refresh: () => {},
     colors: ['#ec0d78', '#bb12e1', '#f805cd', '#eb3757', '#6f2fc5', '#ff7ab8', '#8a8a8a', '#1a1a1a'],
   };
