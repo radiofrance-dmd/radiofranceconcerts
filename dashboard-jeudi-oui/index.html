@@ -110,7 +110,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
     <div class="jo-hero-in">
       <div class="jo-brand">
         <span class="jo-blk">Jeudi Oui !</span>
-        <span class="jo-sub">Tableau de bord</span>
+        <span class="jo-sub">Suivi des performances</span>
       </div>
       <p class="jo-date" id="jo-date"></p>
       <p class="jo-take dash-skeleton" id="takeaway" data-source="comparatifs">—</p>
@@ -467,17 +467,19 @@ dash.calc('part_45_74', {
     {k: 'mail_prospects', lab: 'Email (cible prospects)', color: '#f805cd'},
     {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', color: '#eb3757'},
   ];
-  const SEG_NOTE = 'Octobre 2024 : pas de données. Mars et septembre 2024 : pas d\'email prospects.';
   modeBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => dash.setParams({seg_mode: b.dataset.mode})));
   leg.replaceChildren(...SEG.map((s) => { const sp = document.createElement('span'), i = document.createElement('i'); i.style.background = s.color; sp.append(i, s.lab); return sp; }));
   const drawSegments = () => {
     const mode = dash.params().seg_mode === 'nombre' ? 'nombre' : 'part';
     modeBox.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
-    note.textContent = SEG_NOTE;
-    const eds = editions(), cur = current(), prov = dash.data('provenance');
+    note.textContent = '';
+    const cur = current(), prov = dash.data('provenance');
     d3.select(box).selectAll('svg').remove();
-    if (!eds.length || prov.status !== 'ok') return;
+    if (prov.status !== 'ok') return;
     const byEd = new Map(prov.data.map((r) => [r.edition, r]));
+    // seulement les éditions dont la répartition est connue (octobre 2024 exclue)
+    const eds = editions().filter((e) => byEd.has(e.edition));
+    if (!eds.length) return;
     const data = eds.map((e) => {
       const r = byEd.get(e.edition);
       if (!r) return {e, r: null};
@@ -508,7 +510,6 @@ dash.calc('part_45_74', {
       const d = data.find((x0) => x0.e.edition === cur.edition);
       g.append('rect').attr('x', x(cur.edition) - 3.5).attr('width', x.bandwidth() + 7).attr('y', y(d.top) - 3.5).attr('height', y(0) - y(d.top) + 3.5).style('fill', 'none').style('stroke', 'var(--color-fg)').attr('stroke-width', 2).style('pointer-events', 'none');
     }
-    g.selectAll('text.nd').data(data.filter((d) => !d.r)).join('text').attr('x', (d) => x(d.e.edition) + x.bandwidth() / 2).attr('y', y(0) - 4).attr('text-anchor', 'middle').attr('font-size', 10).style('fill', 'var(--color-fg-muted)').text('n.d.');
     const lw = 52, step = Math.max(1, Math.ceil(lw / x.step()));
     g.selectAll('text.xt').data(eds.filter((e, j) => j % step === (eds.length - 1) % step)).join('text')
       .attr('x', (e) => x(e.edition) + x.bandwidth() / 2).attr('y', H - mB + 16).attr('text-anchor', 'middle').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text((e) => e.libelle);
