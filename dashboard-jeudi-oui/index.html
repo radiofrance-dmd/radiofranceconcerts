@@ -63,12 +63,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 .jo-prov-leg li { display: flex; align-items: center; gap: 6px; }
 .jo-prov-leg i { display: inline-block; width: 12px; height: 12px; flex: none; }
 .jo-chart { position: relative; min-height: 260px; }
-.jo-seg-mode { display: flex; justify-content: center; gap: 0; }
-.jo-seg-mode[hidden], .jo-legend[hidden] { display: none; }
-.jo-seg-mode button { font: inherit; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; padding: 7px 14px; border: 1px solid var(--jo-ink); border-radius: 0; background: var(--color-bg); color: var(--jo-ink); cursor: pointer; }
-.jo-seg-mode button + button { border-left: 0; }
-.jo-seg-mode button[aria-pressed=true] { background: var(--jo-ink); color: var(--color-bg); }
-.jo-seg-mode button:focus-visible { outline: 2px solid var(--jo-pink); outline-offset: 2px; }
+.jo-legend[hidden] { display: none; }
 .jo-comment { margin: 0; font-size: 15px; line-height: 1.4; }
 .jo-comment .jo-hl { font-weight: 900; color: #ec0d78; }
 .jo-chart.tall { min-height: 300px; }
@@ -188,10 +183,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
       <div class="jo-pick">
         <label for="jo-ind">Indicateur</label>
         <select id="jo-ind"></select>
-      </div>
-      <div class="jo-seg-mode" id="seg-mode" hidden>
-        <button type="button" data-mode="part" aria-pressed="true">En part des acheteurs</button>
-        <button type="button" data-mode="nombre" aria-pressed="false">En nombre d'acheteurs</button>
       </div>
       <p class="jo-note" id="ind-note"></p>
       <div class="jo-legend" id="seg-leg" hidden></div>
@@ -362,7 +353,7 @@ dash.calc('part_45_74', {
   const ind = document.getElementById('jo-ind');
   sel.addEventListener('change', () => dash.setParams({edition: sel.value}));
   ind.replaceChildren(...METRICS.filter((m) => m.k !== 'delivres_total').map((m) => new Option(m.sub ? m.lab + ' (' + m.sub + ')' : m.lab, m.k)));
-  ind.insertBefore(new Option('Répartition des ventes par segment', 'segments'), ind.options[1]);
+  ind.insertBefore(new Option('Répartition par cible', 'segments'), ind.options[1]);
   ind.addEventListener('change', () => dash.setParams({indicateur: ind.value}));
   if (!dash.params().indicateur) dash.setParams({indicateur: 'acheteurs'});
 
@@ -461,17 +452,15 @@ dash.calc('part_45_74', {
   const HIST = ['taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens'];
   // Répartition des ventes par segment : barres empilées, en part ou en nombre d'acheteurs
   const {f} = window.JO;
-  const modeBox = document.getElementById('seg-mode'), leg = document.getElementById('seg-leg');
+  const leg = document.getElementById('seg-leg');
   const SEG = [
     {k: 'mail_anciens', lab: 'Email (cible anciens acheteurs)', color: '#bb12e1'},
     {k: 'mail_prospects', lab: 'Email (cible prospects)', color: '#f805cd'},
     {k: 'autre', lab: 'Hors emails (SMS, posts RS et/ou trafic direct)', color: '#eb3757'},
   ];
-  modeBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => dash.setParams({seg_mode: b.dataset.mode})));
   leg.replaceChildren(...SEG.map((s) => { const sp = document.createElement('span'), i = document.createElement('i'); i.style.background = s.color; sp.append(i, s.lab); return sp; }));
   const drawSegments = () => {
-    const mode = dash.params().seg_mode === 'nombre' ? 'nombre' : 'part';
-    modeBox.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === mode)));
+    const mode = 'nombre';
     note.textContent = '';
     const cur = current(), prov = dash.data('provenance');
     d3.select(box).selectAll('svg').remove();
@@ -506,6 +495,9 @@ dash.calc('part_45_74', {
       .on('mousemove', (ev, d) => t.show(ev, [d.e.libelle, ...d.parts.slice().reverse().map((p) => p.s.lab + ' : ' + f.int(p.n) + ' (' + f.pct(p.p) + ')'), 'Total : ' + f.int(d.tot) + ' acheteurs']))
       .on('mouseleave', () => t.hide());
     col.selectAll('rect').data((d) => d.parts).join('rect').attr('width', x.bandwidth()).attr('y', (p) => y(p.y1)).attr('height', (p) => Math.max(0, y(p.y0) - y(p.y1))).style('fill', (p) => p.s.color);
+    const fr0 = window.JO.fr.format('.0%');
+    if (x.bandwidth() >= 24) col.selectAll('text.pc').data((d) => d.parts.filter((pt) => pt.n > 0 && y(pt.y0) - y(pt.y1) >= 14)).join('text').attr('class', 'pc')
+      .attr('x', x.bandwidth() / 2).attr('y', (pt) => (y(pt.y0) + y(pt.y1)) / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').attr('font-size', 10).attr('font-weight', 600).style('fill', '#fff').style('pointer-events', 'none').text((pt) => fr0(pt.p));
     if (cur && byEd.has(cur.edition)) {
       const d = data.find((x0) => x0.e.edition === cur.edition);
       g.append('rect').attr('x', x(cur.edition) - 3.5).attr('width', x.bandwidth() + 7).attr('y', y(d.top) - 3.5).attr('height', y(0) - y(d.top) + 3.5).style('fill', 'none').style('stroke', 'var(--color-fg)').attr('stroke-width', 2).style('pointer-events', 'none');
@@ -517,7 +509,7 @@ dash.calc('part_45_74', {
   };
   dash.onData(() => {
     const k = dash.params().indicateur || 'acheteurs';
-    modeBox.hidden = leg.hidden = k !== 'segments';
+    leg.hidden = k !== 'segments';
     if (k === 'segments') { drawSegments(); return; }
     // KPI emailing d'avant la base Secutix (oct. 2021 - juin 2023) : affichés seulement pour ces 4 indicateurs
     const hist = dash.data('crm_historique');
