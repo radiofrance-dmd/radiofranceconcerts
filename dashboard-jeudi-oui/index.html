@@ -94,7 +94,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
 </style>
 <script src="d3.min.js"></script>
-<script src="dash-shim.js?v=2026-11-04"></script>
+<script src="dash-shim.js?v=2026-11-04b"></script>
 </head>
 <body>
 <div id="dash-root">
@@ -353,9 +353,9 @@ dash.calc('part_45_74', {
   const ind = document.getElementById('jo-ind');
   sel.addEventListener('change', () => dash.setParams({edition: sel.value}));
   ind.replaceChildren(...METRICS.filter((m) => m.k !== 'delivres_total').map((m) => new Option(m.sub ? m.lab + ' (' + m.sub + ')' : m.lab, m.k)));
-  ind.insertBefore(new Option('Répartition par cible', 'segments'), ind.options[1]);
+  ind.insertBefore(new Option('Répartition des ventes par cible', 'segments'), ind.options[0]);
   ind.addEventListener('change', () => dash.setParams({indicateur: ind.value}));
-  if (!dash.params().indicateur) dash.setParams({indicateur: 'acheteurs'});
+  if (!dash.params().indicateur) dash.setParams({indicateur: 'segments'});
 
   const tiles = document.getElementById('chiffres-cles');
   tiles.replaceChildren(...TILES.map((k) => {
@@ -385,7 +385,7 @@ dash.calc('part_45_74', {
       const d = new Date(cur.edition + 'T12:00:00');
       dt.textContent = 'Le ' + d.toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'});
     }
-    ind.value = dash.params().indicateur || 'acheteurs';
+    ind.value = dash.params().indicateur || 'segments';
     const cmp = dash.data('comparatifs');
     const rows = cmp.status === 'ok' ? cmp.data : [];
     TILES.forEach((k) => {
@@ -508,7 +508,7 @@ dash.calc('part_45_74', {
     g.append('line').attr('x1', left).attr('x2', W - mR).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
   };
   dash.onData(() => {
-    const k = dash.params().indicateur || 'acheteurs';
+    const k = dash.params().indicateur || 'segments';
     leg.hidden = k !== 'segments';
     if (k === 'segments') { drawSegments(); return; }
     // KPI emailing d'avant la base Secutix (oct. 2021 - juin 2023) : affichés seulement pour ces 4 indicateurs
