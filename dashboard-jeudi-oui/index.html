@@ -131,7 +131,6 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
             <th data-field="cliqueurs">Cliqueurs</th>
             <th data-field="taux_ouverture">Taux d'ouverture</th>
             <th data-field="taux_clic">Taux de clics</th>
-            <th data-field="reactivite">Clic / ouverture</th>
             <th data-field="desabonnements">Désabos</th>
             <th data-field="taux_desabo">Taux désabo</th>
           </tr></thead>
@@ -178,7 +177,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
   </section>
 
   <section class="jo-sec" id="evolution">
-    <h2>Évolution d'une édition à l'autre</h2>
+    <h2>Bilan global et évolution des éditions</h2>
     <div class="jo-card">
       <div class="jo-pick">
         <label for="jo-ind">Indicateur</label>
@@ -571,7 +570,7 @@ dash.calc('part_45_74', {
     tb.replaceChildren(...rows.map((r) => {
       const tr = document.createElement('tr');
       tr.dataset.key = encodeURIComponent(r.edition) + ',' + encodeURIComponent(r.segment);
-      [r.segment, ...[[f.int, r.delivres], [f.int, r.ouvreurs], [f.int, r.cliqueurs], [f.pct, r.taux_ouverture], [f.pct2, r.taux_clic], [f.pct, r.reactivite], [f.int, r.desabonnements], [f.pct2, r.taux_desabo]].map(([fmt, v]) => num(v) == null ? '–' : fmt(num(v)))]
+      [r.segment, ...[[f.int, r.delivres], [f.int, r.ouvreurs], [f.int, r.cliqueurs], [f.pct, r.taux_ouverture], [f.pct2, r.taux_clic], [f.int, r.desabonnements], [f.pct2, r.taux_desabo]].map(([fmt, v]) => num(v) == null ? '–' : fmt(num(v)))]
         .forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
       return tr;
     }));
