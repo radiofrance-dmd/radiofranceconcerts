@@ -477,18 +477,27 @@ dash.calc('part_45_74', {
     part_reachat: {type: 'avg', s: 'des acheteurs avaient déjà acheté lors d\'une précédente édition', calc: (r) => ratio(r, 'reachats', 'acheteurs'), m: 'Moyenne sur la période, pondérée par le nombre d\'acheteurs de chaque édition.'},
     age_moyen: {type: 'avg', s: 'd\'âge moyen des acheteurs sur la période', calc: (r) => { const x = r.filter(has('age_moyen', 'acheteurs')); const w = sumOf(x, 'acheteurs'); return {v: w ? d3.sum(x, (e) => num(e.age_moyen) * num(e.acheteurs)) / w : null, n: x.length}; },
       m: 'Moyenne sur la période, pondérée par le nombre d\'acheteurs de chaque édition.'},
+    conversion: {type: 'avg', s: 'de taux de conversion sur la période', calc: (r) => ratio(r, 'acheteurs', 'delivres_total'), m: 'Total des acheteurs divisé par le total des emails envoyés de la période.'},
   };
+  // taux emailing : moyenne simple des taux de chaque édition (volumes inconnus avant octobre 2023)
+  const meanOf = (k) => (r) => { const x = r.filter(has(k)); return {v: x.length ? d3.mean(x, (e) => num(e[k])) : null, n: x.length}; };
+  [['taux_ouverture_prospects', 'de taux d\'ouverture moyen (cible prospects)'], ['taux_clic_prospects', 'de taux de clics moyen (cible prospects)'],
+    ['taux_ouverture_anciens', 'de taux d\'ouverture moyen (cible anciens acheteurs)'], ['taux_clic_anciens', 'de taux de clics moyen (cible anciens acheteurs)']]
+    .forEach(([k, s]) => { RANGE[k] = {type: 'avg', s, calc: meanOf(k), m: 'Moyenne des taux de chaque édition de la période.'}; });
   const fillRange = (all) => {
     const key = all.map((e) => e.edition).join();
     if (selFrom.dataset.key !== key) {
       [selFrom, selTo].forEach((s) => { s.replaceChildren(...all.map((e) => new Option(e.libelle, e.edition))); s.dataset.key = key; });
     }
-    if (!rFrom || !all.some((e) => e.edition === rFrom)) rFrom = all[0].edition;
-    if (!rTo || !all.some((e) => e.edition === rTo)) rTo = all[all.length - 1].edition;
-    selFrom.value = rFrom; selTo.value = rTo;
+    // sans choix de la personne (ou choix absent de la liste), la période couvre toutes les éditions de l'indicateur
+    const a = rFrom && all.some((e) => e.edition === rFrom) ? rFrom : all[0].edition;
+    let b = rTo && all.some((e) => e.edition === rTo) ? rTo : all[all.length - 1].edition;
+    if (b < a) b = a;
+    selFrom.value = a; selTo.value = b;
+    return [a, b];
   };
-  selFrom.addEventListener('change', () => { rFrom = selFrom.value; if (rTo < rFrom) rTo = rFrom; draw(); });
-  selTo.addEventListener('change', () => { rTo = selTo.value; if (rFrom > rTo) rFrom = rTo; draw(); });
+  selFrom.addEventListener('change', () => { rFrom = selFrom.value; if (selTo.value < rFrom) rTo = rFrom; draw(); });
+  selTo.addEventListener('change', () => { rTo = selTo.value; if (selFrom.value > rTo) rFrom = rTo; draw(); });
   const showTotal = (k, rows) => {
     const R = RANGE[k], m = byKey[k], res = R.calc(rows);
     totBox.hidden = false;
@@ -566,8 +575,8 @@ dash.calc('part_45_74', {
     const hist = dash.data('crm_historique');
     let eds = (HIST.includes(k) && hist.status === 'ok' ? hist.data.map((r) => ({...r, hist: true})) : []).concat(editions());
     if (isRange) {
-      fillRange(editions());
-      eds = eds.filter((e) => e.edition >= rFrom && e.edition <= rTo);
+      const [a, b] = fillRange(eds);
+      eds = eds.filter((e) => e.edition >= a && e.edition <= b);
       showTotal(k, eds);
     }
     const m = byKey[k];
