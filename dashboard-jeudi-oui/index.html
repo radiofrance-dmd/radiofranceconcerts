@@ -63,6 +63,12 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 .jo-prov-leg li { display: flex; align-items: center; gap: 6px; }
 .jo-prov-leg i { display: inline-block; width: 12px; height: 12px; flex: none; }
 .jo-chart { position: relative; min-height: 260px; }
+.jo-range[hidden], .jo-total[hidden] { display: none; }
+.jo-range select { min-width: 9rem; }
+.jo-total { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; border-left: 6px solid #ec0d78; padding: 6px 0 6px 12px; }
+.jo-total .v { font-weight: 900; font-size: 30px; line-height: 1.1; }
+.jo-total .s { font-size: 14px; }
+.jo-total .m { flex-basis: 100%; font-family: var(--jo-serif); font-style: italic; font-size: 13px; color: var(--jo-grey); }
 .jo-legend[hidden] { display: none; }
 .jo-comment { margin: 0; font-size: 15px; line-height: 1.4; }
 .jo-comment .jo-hl { font-weight: 900; color: #ec0d78; }
@@ -183,7 +189,14 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
         <label for="jo-ind">Indicateur</label>
         <select id="jo-ind"></select>
       </div>
+      <div class="jo-pick jo-range" id="jo-range" hidden>
+        <label for="jo-from">Période du</label>
+        <select id="jo-from"></select>
+        <label for="jo-to">au</label>
+        <select id="jo-to"></select>
+      </div>
       <p class="jo-note" id="ind-note"></p>
+      <div class="jo-total" id="jo-total" hidden><span class="v"></span><span class="s"></span><span class="m"></span></div>
       <div class="jo-legend" id="seg-leg" hidden></div>
       <div class="jo-chart" id="chart-evol" data-source="editions provenance"></div>
     </div>
@@ -446,6 +459,45 @@ dash.calc('part_45_74', {
     part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure. Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les premières éditions.',
   };
   const HIST = ['taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens'];
+  // Sélecteur de période : indicateurs concernés et calcul du cumul (somme) ou de la moyenne sur la période
+  const rangeBox = document.getElementById('jo-range'), selFrom = document.getElementById('jo-from'), selTo = document.getElementById('jo-to');
+  const totBox = document.getElementById('jo-total');
+  let rFrom = null, rTo = null;
+  const sumOf = (rows, k) => d3.sum(rows, (e) => num(e[k]) || 0);
+  const has = (...ks) => (e) => ks.every((k) => num(e[k]) != null);
+  // ratio = somme(a) / somme(b) sur les éditions où les deux valeurs existent (moyenne pondérée)
+  const ratio = (rows, a, b) => { const r = rows.filter(has(a, b)); const den = sumOf(r, b); return {v: den ? sumOf(r, a) / den : null, n: r.length}; };
+  const RANGE = {
+    acheteurs: {type: 'sum', s: 'acheteurs au total', calc: (r) => { const x = r.filter(has('acheteurs')); return {v: sumOf(x, 'acheteurs'), n: x.length}; },
+      m: 'Somme des acheteurs de chaque édition : une personne ayant acheté lors de plusieurs éditions est comptée à chaque fois.'},
+    billets: {type: 'sum', s: 'billets vendus au total', calc: (r) => { const x = r.filter(has('billets')); return {v: sumOf(x, 'billets'), n: x.length}; }},
+    ca_ttc: {type: 'sum', s: 'de CA TTC au total', calc: (r) => { const x = r.filter(has('ca_ttc')); return {v: sumOf(x, 'ca_ttc'), n: x.length}; }},
+    panier_moyen: {type: 'avg', s: 'de panier moyen sur la période', calc: (r) => ratio(r, 'ca_ttc', 'acheteurs'), m: 'CA TTC total divisé par le nombre total d\'acheteurs de la période.'},
+    prix_moyen_billet: {type: 'avg', s: 'par billet en moyenne sur la période', calc: (r) => ratio(r, 'ca_ttc', 'billets'), m: 'CA TTC total divisé par le nombre total de billets de la période.'},
+    part_reachat: {type: 'avg', s: 'des acheteurs avaient déjà acheté lors d\'une précédente édition', calc: (r) => ratio(r, 'reachats', 'acheteurs'), m: 'Moyenne sur la période, pondérée par le nombre d\'acheteurs de chaque édition.'},
+    age_moyen: {type: 'avg', s: 'd\'âge moyen des acheteurs sur la période', calc: (r) => { const x = r.filter(has('age_moyen', 'acheteurs')); const w = sumOf(x, 'acheteurs'); return {v: w ? d3.sum(x, (e) => num(e.age_moyen) * num(e.acheteurs)) / w : null, n: x.length}; },
+      m: 'Moyenne sur la période, pondérée par le nombre d\'acheteurs de chaque édition.'},
+  };
+  const fillRange = (all) => {
+    const key = all.map((e) => e.edition).join();
+    if (selFrom.dataset.key !== key) {
+      [selFrom, selTo].forEach((s) => { s.replaceChildren(...all.map((e) => new Option(e.libelle, e.edition))); s.dataset.key = key; });
+    }
+    if (!rFrom || !all.some((e) => e.edition === rFrom)) rFrom = all[0].edition;
+    if (!rTo || !all.some((e) => e.edition === rTo)) rTo = all[all.length - 1].edition;
+    selFrom.value = rFrom; selTo.value = rTo;
+  };
+  selFrom.addEventListener('change', () => { rFrom = selFrom.value; if (rTo < rFrom) rTo = rFrom; draw(); });
+  selTo.addEventListener('change', () => { rTo = selTo.value; if (rFrom > rTo) rFrom = rTo; draw(); });
+  const showTotal = (k, rows) => {
+    const R = RANGE[k], m = byKey[k], res = R.calc(rows);
+    totBox.hidden = false;
+    totBox.querySelector('.v').textContent = res.v == null ? '—' : m.fmt(res.v);
+    totBox.querySelector('.s').textContent = R.s;
+    const per = rows.length ? (rows.length === 1 ? rows[0].libelle.charAt(0).toUpperCase() + rows[0].libelle.slice(1) : 'De ' + rows[0].libelle + ' à ' + rows[rows.length - 1].libelle) : '';
+    const cnt = res.n === rows.length ? rows.length + (rows.length > 1 ? ' éditions' : ' édition') : res.n + ' éditions sur ' + rows.length + ' (donnée absente pour les autres)';
+    totBox.querySelector('.m').textContent = per + ' · ' + cnt + '.' + (R.m ? ' ' + R.m : '');
+  };
   // Répartition des ventes par segment : barres empilées, en part ou en nombre d'acheteurs
   const {f} = window.JO;
   const leg = document.getElementById('seg-leg');
@@ -503,13 +555,21 @@ dash.calc('part_45_74', {
       .attr('x', (e) => x(e.edition) + x.bandwidth() / 2).attr('y', H - mB + 16).attr('text-anchor', 'middle').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text((e) => e.libelle);
     g.append('line').attr('x1', left).attr('x2', W - mR).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
   };
-  dash.onData(() => {
+  const draw = () => {
     const k = dash.params().indicateur || 'segments';
     leg.hidden = k !== 'segments';
+    const isRange = !!RANGE[k] && editions().length > 0;
+    rangeBox.hidden = !isRange;
+    totBox.hidden = true;
     if (k === 'segments') { drawSegments(); return; }
     // KPI emailing d'avant la base Secutix (oct. 2021 - juin 2023) : affichés seulement pour ces 4 indicateurs
     const hist = dash.data('crm_historique');
-    const eds = (HIST.includes(k) && hist.status === 'ok' ? hist.data.map((r) => ({...r, hist: true})) : []).concat(editions());
+    let eds = (HIST.includes(k) && hist.status === 'ok' ? hist.data.map((r) => ({...r, hist: true})) : []).concat(editions());
+    if (isRange) {
+      fillRange(editions());
+      eds = eds.filter((e) => e.edition >= rFrom && e.edition <= rTo);
+      showTotal(k, eds);
+    }
     const m = byKey[k];
     note.textContent = NOTES[k] || '';
     const cur = current();
@@ -553,7 +613,8 @@ dash.calc('part_45_74', {
     g.selectAll('text.xt').data(eds.filter((e, i) => i % step === (eds.length - 1) % step)).join('text')
       .attr('x', (e) => x(e.edition) + x.bandwidth() / 2).attr('y', H - mB + 16).attr('text-anchor', 'middle').attr('font-size', 11).style('fill', 'var(--color-fg-muted)').text((e) => e.libelle);
     g.append('line').attr('x1', left).attr('x2', W - mR).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
-  });
+  };
+  dash.onData(draw);
 })();
 </script>
 
