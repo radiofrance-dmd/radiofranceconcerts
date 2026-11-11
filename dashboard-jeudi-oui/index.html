@@ -199,6 +199,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
       <div class="jo-total" id="jo-total" hidden><span class="v"></span><span class="s"></span><span class="m"></span></div>
       <div class="jo-legend" id="seg-leg" hidden></div>
       <div class="jo-chart" id="chart-evol" data-source="editions provenance"></div>
+      <p class="jo-note" id="ind-foot" hidden>Historique des données emailing disponible depuis octobre 2021.</p>
     </div>
   </section>
 
@@ -450,12 +451,8 @@ dash.calc('part_45_74', {
   const note = document.getElementById('ind-note');
   const NOTES = {
     ca_ttc: 'Montants disponibles à partir de novembre 2024.', panier_moyen: 'Montants disponibles à partir de novembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de novembre 2024.',
-    taux_clic_prospects: 'Données emailing depuis octobre 2021.',
-    taux_ouverture_prospects: 'Données emailing depuis octobre 2021.',
     delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
     conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis octobre 2023.',
-    taux_ouverture_anciens: 'Données emailing depuis octobre 2021.',
-    taux_clic_anciens: 'Données emailing depuis octobre 2021.',
     part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure.',
   };
   const HIST = ['taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens'];
@@ -567,6 +564,7 @@ dash.calc('part_45_74', {
   const draw = () => {
     const k = dash.params().indicateur || 'segments';
     leg.hidden = k !== 'segments';
+    document.getElementById('ind-foot').hidden = !HIST.includes(k);
     const isRange = !!RANGE[k] && editions().length > 0;
     rangeBox.hidden = !isRange;
     totBox.hidden = true;
