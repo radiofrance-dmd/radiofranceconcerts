@@ -199,6 +199,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
       <div class="jo-total" id="jo-total" hidden><span class="v"></span><span class="s"></span><span class="m"></span></div>
       <div class="jo-legend" id="seg-leg" hidden></div>
       <div class="jo-chart" id="chart-evol" data-source="editions provenance"></div>
+      <p class="jo-note" id="ind-foot" hidden>Historique des données emailing disponible depuis octobre 2021.</p>
     </div>
   </section>
 
@@ -449,14 +450,10 @@ dash.calc('part_45_74', {
   const box = document.getElementById('chart-evol');
   const note = document.getElementById('ind-note');
   const NOTES = {
-    ca_ttc: 'Montants disponibles à partir de novembre 2024 (novembre 2024 : CA total seulement, d\'après le bilan marketing).', panier_moyen: 'Montants disponibles à partir de novembre 2024 (novembre 2024 : CA total seulement, d\'après le bilan marketing).', prix_moyen_billet: 'Montants disponibles à partir de novembre 2024 (novembre 2024 : CA total seulement, d\'après le bilan marketing).',
-    taux_clic_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
-    taux_ouverture_prospects: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés. La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026, ce qui fait monter les taux.',
+    ca_ttc: 'Montants disponibles à partir de novembre 2024.', panier_moyen: 'Montants disponibles à partir de novembre 2024.', prix_moyen_billet: 'Montants disponibles à partir de novembre 2024.',
     delivres_total: 'Données emailing disponibles depuis octobre 2023 (prospects absents en mars et septembre 2024). La base prospects passe d\'environ 80 000 à 25 000 contacts à partir de juin 2026.',
     conversion: 'Acheteurs de l\'édition divisés par le nombre d\'emails envoyés (deux segments, hors adresses en erreur). Depuis octobre 2023.',
-    taux_ouverture_anciens: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés.',
-    taux_clic_anciens: 'Données emailing depuis octobre 2021. Avant octobre 2023, seuls les KPI emailing sont connus (pas de ventes). Saison 2021-22 : taux de clics recalculé sur les emails délivrés.',
-    part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure. Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les premières éditions.',
+    part_reachat: 'Acheteurs ayant déjà acheté lors d\'une édition antérieure.',
   };
   const HIST = ['taux_clic_prospects', 'taux_ouverture_prospects', 'taux_ouverture_anciens', 'taux_clic_anciens'];
   // Sélecteur de période : indicateurs concernés et calcul du cumul (somme) ou de la moyenne sur la période
@@ -477,18 +474,27 @@ dash.calc('part_45_74', {
     part_reachat: {type: 'avg', s: 'des acheteurs avaient déjà acheté lors d\'une précédente édition', calc: (r) => ratio(r, 'reachats', 'acheteurs'), m: 'Moyenne sur la période, pondérée par le nombre d\'acheteurs de chaque édition.'},
     age_moyen: {type: 'avg', s: 'd\'âge moyen des acheteurs sur la période', calc: (r) => { const x = r.filter(has('age_moyen', 'acheteurs')); const w = sumOf(x, 'acheteurs'); return {v: w ? d3.sum(x, (e) => num(e.age_moyen) * num(e.acheteurs)) / w : null, n: x.length}; },
       m: 'Moyenne sur la période, pondérée par le nombre d\'acheteurs de chaque édition.'},
+    conversion: {type: 'avg', s: 'de taux de conversion sur la période', calc: (r) => ratio(r, 'acheteurs', 'delivres_total'), m: 'Total des acheteurs divisé par le total des emails envoyés de la période.'},
   };
+  // taux emailing : moyenne simple des taux de chaque édition (volumes inconnus avant octobre 2023)
+  const meanOf = (k) => (r) => { const x = r.filter(has(k)); return {v: x.length ? d3.mean(x, (e) => num(e[k])) : null, n: x.length}; };
+  [['taux_ouverture_prospects', 'de taux d\'ouverture moyen (cible prospects)'], ['taux_clic_prospects', 'de taux de clics moyen (cible prospects)'],
+    ['taux_ouverture_anciens', 'de taux d\'ouverture moyen (cible anciens acheteurs)'], ['taux_clic_anciens', 'de taux de clics moyen (cible anciens acheteurs)']]
+    .forEach(([k, s]) => { RANGE[k] = {type: 'avg', s, calc: meanOf(k), m: 'Moyenne des taux de chaque édition de la période.'}; });
   const fillRange = (all) => {
     const key = all.map((e) => e.edition).join();
     if (selFrom.dataset.key !== key) {
       [selFrom, selTo].forEach((s) => { s.replaceChildren(...all.map((e) => new Option(e.libelle, e.edition))); s.dataset.key = key; });
     }
-    if (!rFrom || !all.some((e) => e.edition === rFrom)) rFrom = all[0].edition;
-    if (!rTo || !all.some((e) => e.edition === rTo)) rTo = all[all.length - 1].edition;
-    selFrom.value = rFrom; selTo.value = rTo;
+    // sans choix de la personne (ou choix absent de la liste), la période couvre toutes les éditions de l'indicateur
+    const a = rFrom && all.some((e) => e.edition === rFrom) ? rFrom : all[0].edition;
+    let b = rTo && all.some((e) => e.edition === rTo) ? rTo : all[all.length - 1].edition;
+    if (b < a) b = a;
+    selFrom.value = a; selTo.value = b;
+    return [a, b];
   };
-  selFrom.addEventListener('change', () => { rFrom = selFrom.value; if (rTo < rFrom) rTo = rFrom; draw(); });
-  selTo.addEventListener('change', () => { rTo = selTo.value; if (rFrom > rTo) rFrom = rTo; draw(); });
+  selFrom.addEventListener('change', () => { rFrom = selFrom.value; if (selTo.value < rFrom) rTo = rFrom; draw(); });
+  selTo.addEventListener('change', () => { rTo = selTo.value; if (selFrom.value > rTo) rFrom = rTo; draw(); });
   const showTotal = (k, rows) => {
     const R = RANGE[k], m = byKey[k], res = R.calc(rows);
     totBox.hidden = false;
@@ -558,6 +564,7 @@ dash.calc('part_45_74', {
   const draw = () => {
     const k = dash.params().indicateur || 'segments';
     leg.hidden = k !== 'segments';
+    document.getElementById('ind-foot').hidden = !HIST.includes(k);
     const isRange = !!RANGE[k] && editions().length > 0;
     rangeBox.hidden = !isRange;
     totBox.hidden = true;
@@ -566,12 +573,14 @@ dash.calc('part_45_74', {
     const hist = dash.data('crm_historique');
     let eds = (HIST.includes(k) && hist.status === 'ok' ? hist.data.map((r) => ({...r, hist: true})) : []).concat(editions());
     if (isRange) {
-      fillRange(editions());
-      eds = eds.filter((e) => e.edition >= rFrom && e.edition <= rTo);
+      const [a, b] = fillRange(eds);
+      eds = eds.filter((e) => e.edition >= a && e.edition <= b);
       showTotal(k, eds);
     }
     const m = byKey[k];
     note.textContent = NOTES[k] || '';
+    // mention de l'historique incomplet seulement si la période affichée comprend la saison 2023-24
+    if (k === 'part_reachat' && eds.some((e) => e.edition < '2024-09-01')) note.textContent += ' Les achats d\'avant octobre 2023 viennent d\'un historique incomplet (2017-2023) : la part réelle peut être un peu plus élevée sur les éditions de la saison 2023-24.';
     const cur = current();
     d3.select(box).selectAll('svg').remove();
     if (!eds.length) return;
