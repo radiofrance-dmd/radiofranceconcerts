@@ -371,21 +371,35 @@ edition,concert,date_concert,billets,ca_ttc,lignes
 2026-09-17,"DM.61015.Beethoven, Missa Solemnis, Petr Popelka",15.10.2026 20:00,4,112.0,3
 2026-09-17,"DM.JAZZ.61010.The James Carter Quartet, Stéphane Guillaume",10.10.2026 19:00,17,536.0,10
 2026-09-17,"DM.PP.60925.Wagner, Tristan et Isolde, Jaap van Zweden",25.09.2026 20:00,20,774.0,14
-2026-10-15,"DM.61016.Ravel, Concerto pour la main gauche, centenaire",16.10.2026 20:00,17,749.0,14
+2026-10-15,"DM.61016.Ravel, Concerto pour la main gauche, centenaire",16.10.2026 20:00,16,715.0,13
 2026-10-15,"DM.61018.Schumann / Kurtág, Pierre-Laurent Aimard, Philhar'",18.10.2026 16:00,24,312.0,16
-2026-10-15,"DM.61020.Scarlatti, Stabat Mater, La Grande Chapelle",20.10.2026 20:00,30,894.0,19
-2026-10-15,"DM.61022.Quatre Derniers Lieder, Christiane Karg / Stasevska",22.10.2026 20:00,26,743.0,18
-2026-10-15,"DM.61023.CHLOÉ / Vassilena Serafimova, Classique & mix avec",23.10.2026 20:00,14,357.0,10
-2026-10-15,"DM.61024.Chopin / Beethoven, Arielle Beck",24.10.2026 20:00,27,723.0,17
-2026-10-15,"DM.61030.INA grm, Akousma",30.10.2026 20:30,15,90.0,10
+2026-10-15,"DM.61020.Scarlatti, Stabat Mater, La Grande Chapelle",20.10.2026 20:00,28,833.0,17
+2026-10-15,"DM.61022.Quatre Derniers Lieder, Christiane Karg / Stasevska",22.10.2026 20:00,20,585.0,15
+2026-10-15,"DM.61023.CHLOÉ / Vassilena Serafimova, Classique & mix avec",23.10.2026 20:00,10,256.0,7
+2026-10-15,"DM.61024.Chopin / Beethoven, Arielle Beck",24.10.2026 20:00,22,596.0,14
+2026-10-15,"DM.61030.INA grm, Akousma",30.10.2026 20:30,11,66.0,7
 2026-10-15,"DM.61031.INA grm, Akousma",31.10.2026 20:30,6,36.0,4
-2026-10-15,"DM.61101.INA grm, Akousma",01.11.2026 18:00,13,78.0,8
-2026-10-15,"DM.61107.Bach, Messe Brève, Sofi Jeannin",07.11.2026 20:00,13,307.0,8
-2026-10-15,"DM.61115.Schubert / Chopin, Emanuel Ax",15.11.2026 16:00,6,164.0,3
-2026-10-15,"DM.61118.Avoaha, Chœur et percussions",18.11.2026 20:00,11,152.0,8
+2026-10-15,"DM.61101.INA grm, Akousma",01.11.2026 18:00,12,72.0,7
+2026-10-15,"DM.61107.Bach, Messe Brève, Sofi Jeannin",07.11.2026 20:00,11,257.0,7
+2026-10-15,"DM.61118.Avoaha, Chœur et percussions",18.11.2026 20:00,5,70.0,3
 2026-10-15,"DM.FIC.61106A.Cendrillon, Concert-fiction France Culture",06.11.2026 20:30,8,96.0,4
-2026-10-15,"DM.FIC.61107A.Cendrillon, Concert-fiction France Culture",07.11.2026 14:00,14,168.0,9
+2026-10-15,"DM.FIC.61107A.Cendrillon, Concert-fiction France Culture",07.11.2026 14:00,13,156.0,8
 2026-10-15,"DM.FIC.61107B.Cendrillon, Concert-fiction France Culture",07.11.2026 17:00,2,24.0,1
-2026-10-15,"DM.JAZZ.61114.Paolo Fresu Devil Quartet, Diego Imbert Sextet",14.11.2026 19:00,8,240.0,6
+2026-10-15,"DM.JAZZ.61114.Paolo Fresu Devil Quartet, Diego Imbert Sextet",14.11.2026 19:00,5,150.0,4
 2026-10-15,"DM.JP.61017A.Marguerite, Légendes orientales",17.10.2026 14:30,7,84.0,4
-2026-10-15,"DM.JP.61017B.Marguerite, Légendes orientales",17.10.2026 17:00,18,216.0,10
+2026-10-15,"DM.JP.61017B.Marguerite, Légendes orientales",17.10.2026 17:00,15,180.0,8
+2026-11-19,"DM.61122.Schubert, Quatuor « Rosamunde », les Dimanches...",22.11.2026 16:00,50,686.0,29
+2026-11-19,"DM.61126.Dvořák / Saint-Saëns, Alexandra Conunova",26.11.2026 20:00,76,2166.0,49
+2026-11-19,DM.61128.Une grande journée violoncelle et orgue #1,28.11.2026 16:00,8,112.0,5
+2026-11-19,DM.61128A.Une grande journée violoncelle et orgue #2,28.11.2026 20:00,8,106.0,6
+2026-11-19,"DM.61129.Schumann / Haydn / Mařatka, Quatuor Modigliani",29.11.2026 16:00,38,522.0,22
+2026-11-19,"DM.61204.Britten, Cantate Saint Nicolas, Lionel Sow",04.12.2026 20:00,25,534.0,15
+2026-11-19,"DM.61205.Brahms, Symphonie n°1, Jakub Hrůša",05.12.2026 20:00,38,1229.0,25
+2026-11-19,"DM.61206.Brahms, Symphonie n°1, Jakub Hrůša",06.12.2026 20:00,36,1081.0,21
+2026-11-19,"DM.61208.Britten, A Ceremony of Carols, Sofi Jeannin",08.12.2026 20:00,15,206.0,11
+2026-11-19,"DM.61213.Mozart, Quatuors flûte et piano, Philhar’Intime",13.12.2026 16:00,46,808.0,25
+2026-11-19,"DM.61216.Mozart, Concerto pour violon n°4, Nathan Mierdl",16.12.2026 20:00,17,492.0,10
+2026-11-19,"DM.61217.Ravel, Boléro et Rapsodie espagnole, Gabel/Perianes",17.12.2026 20:00,2,68.0,1
+2026-11-19,"DM.61218.Ravel, Boléro et Rapsodie espagnole, Gabel/Perianes",18.12.2026 20:00,9,459.0,6
+2026-11-19,"DM.JP.61212A.Conte d’hiver, Oli en concert",12.12.2026 14:30,3,36.0,2
+2026-11-19,"DM.JP.61212B.Conte d’hiver, Oli en concert",12.12.2026 17:00,7,84.0,5
